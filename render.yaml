@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: yourclean
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: python manage.py migrate && gunicorn yourclean.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: yourclean.onrender.com
+    database:
+      name: yourclean-db
+      plan: free
+      databaseName: yourclean
+      user: yourclean_user
