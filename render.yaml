@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
-    startCommand: python manage.py migrate && gunicorn yourclean.wsgi:application --bind 0.0.0.0:$PORT
+    startCommand: python manage.py migrate && python create_superuser.py && gunicorn yourclean.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -14,6 +14,12 @@ services:
         value: False
       - key: ALLOWED_HOSTS
         value: yourclean.onrender.com
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_EMAIL
+        value: admin@yourclean.cz
+      - key: ADMIN_PASSWORD
+        value: admin123
     database:
       name: yourclean-db
       plan: free
