@@ -46,6 +46,13 @@ class CleaningType(models.Model):
         default=1.00,
         verbose_name="Коэффициент сложности"
     )
+    image = models.ImageField(
+        upload_to='cleaning_types/',
+        blank=True,
+        null=True,
+        verbose_name="Фото типа уборки",
+        help_text="Загрузите изображение, которое будет отображаться на сайте"
+    )
     is_active = models.BooleanField(default=True, verbose_name="Активна")
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -106,6 +113,13 @@ class DryCleaningService(models.Model):
         choices=UNIT_CHOICES,
         default="item",
         verbose_name="Единица измерения"
+    )
+    image = models.ImageField(
+        upload_to='dry_cleaning/',
+        blank=True,
+        null=True,
+        verbose_name="Фото услуги",
+        help_text="Фото будет показано в блоке услуг"
     )
     is_active = models.BooleanField(default=True, verbose_name="Активна")
 

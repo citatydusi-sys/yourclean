@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Калькулятор стоимости — YourClean{% endblock %}
-{% block meta_description %}Рассчитайте стоимость уборки онлайн. Выберите дату, тип услуги и получите цену сразу.{% endblock %}
+{% block title %}{% trans "Калькулятор стоимости — YourClean" %}{% endblock %}
+{% block meta_description %}{% trans "Рассчитайте стоимость уборки онлайн. Выберите дату, тип услуги и получите цену сразу." %}{% endblock %}
 
 {% block content %}
 <!-- Page Hero -->
-<section class="page-hero page-hero--calculator">
+<section class="page-hero page-hero--calculator page-hero--overlap">
     <div class="container">
         <div class="page-hero__content">
-            <span class="page-hero__badge">Онлайн калькулятор</span>
-            <h1 class="page-hero__title">Рассчитать стоимость</h1>
+            <span class="page-hero__badge">{% trans "Онлайн калькулятор" %}</span>
+            <h1 class="page-hero__title">{% trans "Рассчитать стоимость" %}</h1>
             <p class="page-hero__subtitle">
-                Выберите дату, тип услуги и параметры — мгновенно узнаете точную цену
+                {% trans "Выберите дату, тип услуги и параметры — мгновенно узнаете точную цену" %}
             </p>
         </div>
     </div>
@@ -25,19 +25,19 @@
         <div class="steps-indicator">
             <div class="step-item active" data-step="1">
                 <div class="step-item__number">1</div>
-                <div class="step-item__label">Дата</div>
+                <div class="step-item__label">{% trans "Дата" %}</div>
             </div>
             <div class="step-item" data-step="2">
                 <div class="step-item__number">2</div>
-                <div class="step-item__label">Услуга</div>
+                <div class="step-item__label">{% trans "Услуга" %}</div>
             </div>
             <div class="step-item" data-step="3">
                 <div class="step-item__number">3</div>
-                <div class="step-item__label">Параметры</div>
+                <div class="step-item__label">{% trans "Параметры" %}</div>
             </div>
             <div class="step-item" data-step="4">
                 <div class="step-item__number">4</div>
-                <div class="step-item__label">Заказ</div>
+                <div class="step-item__label">{% trans "Заказ" %}</div>
             </div>
         </div>
 
@@ -47,18 +47,19 @@
                 <!-- Step 1: Calendar -->
                 <div class="calculator-step" id="step-1" data-step="1">
                     <div class="calculator-header">
-                        <h2 class="calculator-header__title">Выберите дату</h2>
-                        <p class="calculator-header__subtitle">Некоторые даты имеют специальные скидки</p>
+                        <h2 class="calculator-header__title">{% trans "Выберите дату" %}</h2>
+                        <p class="calculator-header__subtitle">{% trans "Некоторые даты имеют специальные скидки" %}</p>
                     </div>
                     <div class="calculator-body">
-                        <div class="calendar-container" id="calendar-container">
+                        <div class="calendar-container" id="calendar-container"
+                            data-month-names='["{% trans 'Январь' %}", "{% trans 'Февраль' %}", "{% trans 'Март' %}", "{% trans 'Апрель' %}", "{% trans 'Май' %}", "{% trans 'Июнь' %}", "{% trans 'Июль' %}", "{% trans 'Август' %}", "{% trans 'Сентябрь' %}", "{% trans 'Октябрь' %}", "{% trans 'Ноябрь' %}", "{% trans 'Декабрь' %}"]'>
                             <div class="calendar-header">
                                 <button type="button" class="calendar-nav" id="calendar-prev">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M15 18l-6-6 6-6" />
                                     </svg>
                                 </button>
-                                <div class="calendar-title" id="calendar-title">Январь 2026</div>
+                                <div class="calendar-title" id="calendar-title">{% trans "Январь 2026" %}</div>
                                 <button type="button" class="calendar-nav" id="calendar-next">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M9 18l6-6-6-6" />
@@ -66,7 +67,7 @@
                                 </button>
                             </div>
                             <div class="calendar-weekdays">
-                                <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+                                <span>{% trans "Пн" %}</span><span>{% trans "Вт" %}</span><span>{% trans "Ср" %}</span><span>{% trans "Чт" %}</span><span>{% trans "Пт" %}</span><span>{% trans "Сб" %}</span><span>{% trans "Вс" %}</span>
                             </div>
                             <div class="calendar-days" id="calendar-days">
                                 <!-- Days will be generated by JS -->
@@ -74,11 +75,11 @@
                             <div class="calendar-legend">
                                 <div class="calendar-legend__item">
                                     <span class="calendar-legend__dot calendar-legend__dot--discount"></span>
-                                    <span>Скидка</span>
+                                    <span>{% trans "Скидка" %}</span>
                                 </div>
                                 <div class="calendar-legend__item">
                                     <span class="calendar-legend__dot calendar-legend__dot--selected"></span>
-                                    <span>Выбрано</span>
+                                    <span>{% trans "Выбрано" %}</span>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +90,7 @@
                     </div>
                     <div class="calculator-footer">
                         <button type="button" class="btn btn--primary btn--lg btn--full" id="step1-next" disabled>
-                            Далее
+                            {% trans "Далее" %}
                             <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd"
                                     d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" />
@@ -101,8 +102,8 @@
                 <!-- Step 2: Service Type -->
                 <div class="calculator-step" id="step-2" data-step="2" style="display: none;">
                     <div class="calculator-header">
-                        <h2 class="calculator-header__title">Выберите услугу</h2>
-                        <p class="calculator-header__subtitle">Клининг или химчистка?</p>
+                        <h2 class="calculator-header__title">{% trans "Выберите услугу" %}</h2>
+                        <p class="calculator-header__subtitle">{% trans "Клининг или химчистка?" %}</p>
                     </div>
                     <div class="calculator-body">
                         <div class="service-type-grid">
@@ -110,8 +111,8 @@
                                 <input type="radio" name="service_type" value="cleaning" checked>
                                 <div class="service-type-card__content">
                                     <div class="service-type-card__icon">🏠</div>
-                                    <div class="service-type-card__title">Уборка</div>
-                                    <div class="service-type-card__desc">Генеральная и поддерживающая уборка помещений
+                                    <div class="service-type-card__title">{% trans "Уборка" %}</div>
+                                    <div class="service-type-card__desc">{% trans "Генеральная и поддерживающая уборка помещений" %}
                                     </div>
                                 </div>
                             </label>
@@ -119,8 +120,8 @@
                                 <input type="radio" name="service_type" value="drycleaning">
                                 <div class="service-type-card__content">
                                     <div class="service-type-card__icon">🛋️</div>
-                                    <div class="service-type-card__title">Химчистка</div>
-                                    <div class="service-type-card__desc">Химчистка мебели, ковров, матрасов</div>
+                                    <div class="service-type-card__title">{% trans "Химчистка" %}</div>
+                                    <div class="service-type-card__desc">{% trans "Химчистка мебели, ковров, матрасов" %}</div>
                                 </div>
                             </label>
                         </div>
@@ -131,10 +132,10 @@
                                 <path fill-rule="evenodd"
                                     d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" />
                             </svg>
-                            Назад
+                            {% trans "Назад" %}
                         </button>
                         <button type="button" class="btn btn--primary btn--lg" id="step2-next">
-                            Далее
+                            {% trans "Далее" %}
                             <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd"
                                     d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" />
@@ -146,15 +147,15 @@
                 <!-- Step 3: Calculator Parameters -->
                 <div class="calculator-step" id="step-3" data-step="3" style="display: none;">
                     <div class="calculator-header">
-                        <h2 class="calculator-header__title">Параметры</h2>
-                        <p class="calculator-header__subtitle">Укажите детали вашего заказа</p>
+                        <h2 class="calculator-header__title">{% trans "Параметры" %}</h2>
+                        <p class="calculator-header__subtitle">{% trans "Укажите детали вашего заказа" %}</p>
                     </div>
                     <div class="calculator-body">
                         <!-- Cleaning Parameters -->
                         <div id="cleaning-params">
                             <!-- Level Selection -->
                             <div class="form__group">
-                                <label class="form__label">Тип уборки</label>
+                                <label class="form__label">{% trans "Тип уборки" %}</label>
                                 <div class="tabs tabs--premium" id="level-tabs">
                                     <button type="button" class="tab active" data-level="basic">BASIC</button>
                                     <button type="button" class="tab" data-level="general">GENERAL</button>
@@ -165,40 +166,40 @@
                             <!-- Level Descriptions -->
                             <div class="level-descriptions" id="level-descriptions">
                                 <div class="level-description active" data-level="basic">
-                                    <h4 class="h5 mb-2">BASIC — Поддерживающая уборка</h4>
-                                    <p class="text-muted">Быстрая уборка для поддержания чистоты</p>
+                                    <h4 class="h5 mb-2">{% trans "BASIC — Поддерживающая уборка" %}</h4>
+                                    <p class="text-muted">{% trans "Быстрая уборка для поддержания чистоты" %}</p>
                                 </div>
                                 <div class="level-description" data-level="general">
-                                    <h4 class="h5 mb-2">GENERAL — Генеральная уборка</h4>
-                                    <p class="text-muted">Глубокая уборка с детальной обработкой</p>
+                                    <h4 class="h5 mb-2">{% trans "GENERAL — Генеральная уборка" %}</h4>
+                                    <p class="text-muted">{% trans "Глубокая уборка с детальной обработкой" %}</p>
                                 </div>
                                 <div class="level-description" data-level="general_plus">
-                                    <h4 class="h5 mb-2">GENERAL+ — Премиум уборка</h4>
-                                    <p class="text-muted">Максимально тщательная уборка с химчисткой</p>
+                                    <h4 class="h5 mb-2">{% trans "GENERAL+ — Премиум уборка" %}</h4>
+                                    <p class="text-muted">{% trans "Максимально тщательная уборка с химчисткой" %}</p>
                                 </div>
                             </div>
 
                             <!-- Area Input -->
                             <div class="form__group">
-                                <label class="form__label" for="area">Площадь (м²)</label>
+                                <label class="form__label" for="area">{% trans "Площадь (м²)" %}</label>
                                 <div class="area-input-wrapper">
                                     <input type="number" id="area" class="form__input" min="20" max="500" value="50"
-                                        step="1" placeholder="Введите площадь">
-                                    <span class="area-input-suffix">м²</span>
+                                        step="1" placeholder="{% trans 'Введите площадь' %}">
+                                    <span class="area-input-suffix">{% trans "м²" %}</span>
                                 </div>
                                 <div class="range-slider">
                                     <input type="range" id="area-slider" class="range-slider__input" min="20" max="200"
                                         value="50">
                                     <div class="range-slider__labels">
-                                        <span>20 м²</span>
-                                        <span>200 м²</span>
+                                        <span>{% trans "20 м²" %}</span>
+                                        <span>{% trans "200 м²" %}</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Extra Services -->
                             <div class="form__group">
-                                <label class="form__label">Дополнительные услуги</label>
+                                <label class="form__label">{% trans "Дополнительные услуги" %}</label>
                                 <div class="extras-grid" id="extra-services">
                                     <div class="skeleton" style="height: 48px;"></div>
                                 </div>
@@ -208,7 +209,7 @@
                         <!-- Drycleaning Parameters -->
                         <div id="drycleaning-params" style="display: none;">
                             <div class="form__group">
-                                <label class="form__label">Выберите объекты химчистки</label>
+                                <label class="form__label">{% trans "Выберите объекты химчистки" %}</label>
                                 <div class="drycleaning-items" id="drycleaning-items">
                                     <div class="skeleton" style="height: 48px;"></div>
                                 </div>
@@ -217,7 +218,7 @@
 
                         <!-- Price Display -->
                         <div class="price-display" id="price-display">
-                            <div class="price-display__label">Итого</div>
+                            <div class="price-display__label">{% trans "Итого" %}</div>
                             {% if promo_text %}
                             <div class="price-display__promo">{{ promo_text.text }}</div>
                             {% endif %}
@@ -226,7 +227,7 @@
                                 <span class="spinner"></span>
                             </div>
                             <div class="price-display__discount" id="discount-info" style="display: none;"></div>
-                            <div class="price-display__note">Точная цена после осмотра</div>
+                            <div class="price-display__note">{% trans "Точная цена после осмотра" %}</div>
                         </div>
                     </div>
                     <div class="calculator-footer">
@@ -235,10 +236,10 @@
                                 <path fill-rule="evenodd"
                                     d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" />
                             </svg>
-                            Назад
+                            {% trans "Назад" %}
                         </button>
                         <button type="button" class="btn btn--primary btn--lg" id="step3-next">
-                            Оформить заказ
+                            {% trans "Оформить заказ" %}
                             <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd"
                                     d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" />
@@ -250,46 +251,46 @@
                 <!-- Step 4: Order Form -->
                 <div class="calculator-step" id="step-4" data-step="4" style="display: none;">
                     <div class="calculator-header">
-                        <h2 class="calculator-header__title">Оформление заказа</h2>
-                        <p class="calculator-header__subtitle">Заполните контактные данные</p>
+                        <h2 class="calculator-header__title">{% trans "Оформление заказа" %}</h2>
+                        <p class="calculator-header__subtitle">{% trans "Заполните контактные данные" %}</p>
                     </div>
                     <div class="calculator-body">
                         <!-- Order Summary -->
                         <div class="order-summary" id="order-summary">
-                            <h4 class="order-summary__title">Ваш заказ</h4>
+                            <h4 class="order-summary__title">{% trans "Ваш заказ" %}</h4>
                             <div class="order-summary__items" id="order-summary-items">
                                 <!-- Filled by JS -->
                             </div>
                             <div class="order-summary__total">
-                                <span>Итого:</span>
-                                <span id="order-summary-total">0 ₽</span>
+                                <span>{% trans "Итого:" %}</span>
+                                <span id="order-summary-total">0 Kč</span>
                             </div>
                         </div>
 
                         <form class="form" id="order-form">
                             <div class="form__row">
                                 <div class="form__group">
-                                    <label class="form__label form__label--required" for="name">Имя</label>
-                                    <input type="text" id="name" name="name" class="form__input" placeholder="Ваше имя"
+                                    <label class="form__label form__label--required" for="name">{% trans "Имя" %}</label>
+                                    <input type="text" id="name" name="name" class="form__input" placeholder="{% trans 'Ваше имя' %}"
                                         required>
                                 </div>
                                 <div class="form__group">
-                                    <label class="form__label form__label--required" for="phone">Телефон</label>
+                                    <label class="form__label form__label--required" for="phone">{% trans "Телефон" %}</label>
                                     <input type="tel" id="phone" name="phone" class="form__input" placeholder="+7 ..."
                                         required>
                                 </div>
                             </div>
 
                             <div class="form__group">
-                                <label class="form__label" for="address">Адрес</label>
+                                <label class="form__label" for="address">{% trans "Адрес" %}</label>
                                 <input type="text" id="address" name="address" class="form__input"
-                                    placeholder="Улица, дом, квартира">
+                                    placeholder="{% trans 'Улица, дом, квартира' %}">
                             </div>
 
                             <div class="form__group">
-                                <label class="form__label" for="time">Удобное время</label>
+                                <label class="form__label" for="time">{% trans "Удобное время" %}</label>
                                 <select id="time" name="time" class="form__select">
-                                    <option value="">Выберите время</option>
+                                    <option value="">{% trans "Выберите время" %}</option>
                                     <option value="08:00">08:00 — 10:00</option>
                                     <option value="10:00">10:00 — 12:00</option>
                                     <option value="12:00">12:00 — 14:00</option>
@@ -299,26 +300,23 @@
                             </div>
 
                             <div class="form__group">
-                                <label class="form__label" for="comment">Комментарий</label>
+                                <label class="form__label" for="comment">{% trans "Комментарий" %}</label>
                                 <textarea id="comment" name="comment" class="form__textarea" rows="3"
-                                    placeholder="Особые пожелания..."></textarea>
+                                    placeholder="{% trans 'Особые пожелания...' %}"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="calculator-footer calculator-footer--column">
                         <button type="button" class="btn btn--whatsapp btn--xl btn--full" id="submit-whatsapp">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                                <path
-                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                            </svg>
-                            Отправить в WhatsApp
+                            
+                            {% trans "Оформить заказ" %}
                         </button>
                         <button type="button" class="btn btn--outline btn--lg" id="step4-prev">
                             <svg class="btn__icon btn__icon--left" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd"
                                     d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" />
                             </svg>
-                            Назад
+                            {% trans "Назад" %}
                         </button>
                     </div>
                 </div>
@@ -331,10 +329,10 @@
                             <path d="M22 4L12 14.01l-3-3" />
                         </svg>
                     </div>
-                    <h3 class="h3 mb-4">Заказ отправлен!</h3>
-                    <p class="lead mb-6">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+                    <h3 class="h3 mb-4">{% trans "Заказ отправлен!" %}</h3>
+                    <p class="lead mb-6">{% trans "Спасибо! Мы свяжемся с вами в ближайшее время." %}</p>
                     <a href="{% url 'calculator:home' %}" class="btn btn--primary btn--lg">
-                        На главную
+                        {% trans "На главную" %}
                     </a>
                 </div>
             </div>

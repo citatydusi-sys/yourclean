@@ -360,9 +360,18 @@ def create_order_api(request):
         order_text = format_order_for_external(order, data)
         
         # URL для отправки (можно настроить в админке или через переменные окружения)
-        whatsapp_number = CompanyInfo.get_info().whatsapp or ""
+        whatsapp_number = CompanyInfo.get_info().whatsapp
+        if not whatsapp_number:
+            whatsapp_number = "77077801708" # Номер основателя по умолчанию
         google_forms_url = ""  # Можно добавить в CompanyInfo
         
+        # Отправка в Google Sheets
+        try:
+            from .google_sheets import append_to_google_sheet
+            append_to_google_sheet(order)
+        except Exception as e:
+            print(f"Failed to append to Google Sheet: {e}")
+
         return JsonResponse({
             "success": True,
             "message": "Заявка успешно создана",

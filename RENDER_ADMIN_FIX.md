@@ -109,7 +109,7 @@ DEBUG=False
 ALLOWED_HOSTS=yourclean.onrender.com
 ADMIN_USERNAME=admin
 ADMIN_EMAIL=admin@yourclean.cz
-ADMIN_PASSWORD=your-secure-password-here
+ADMIN_PASSWORD=almaz123
 DATABASE_URL=(автоматически создается Render при создании PostgreSQL)
 ```
 
@@ -119,7 +119,7 @@ DATABASE_URL=(автоматически создается Render при соз
 3. Добавьте/обновите переменные:
    - `ADMIN_USERNAME` = `admin`
    - `ADMIN_EMAIL` = `admin@yourclean.cz`
-   - `ADMIN_PASSWORD` = `ваш-надежный-пароль`
+   - `ADMIN_PASSWORD` = `almaz123`
    - `SECRET_KEY` = (сгенерируйте: `python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"`)
    - `DEBUG` = `False`
    - `ALLOWED_HOSTS` = `yourclean.onrender.com` (ваш домен)

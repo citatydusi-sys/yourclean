@@ -15,18 +15,33 @@ class Calculator {
         this.extraServices = [];
         this.drycleaningItems = {};
         this.discounts = {};
+        this.isSubmitting = false;
 
         // Calendar state
         this.currentMonth = new Date().getMonth();
         this.currentYear = new Date().getFullYear();
 
-        // Месяцы на русском
-        this.monthNames = [
-            'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-            'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
-        ];
+        this.monthNames = this.getMonthNames();
 
         this.init();
+    }
+
+    getMonthNames() {
+        const container = document.getElementById('calendar-container');
+        if (container && container.dataset.monthNames) {
+            try {
+                const parsed = JSON.parse(container.dataset.monthNames);
+                if (Array.isArray(parsed) && parsed.length === 12) {
+                    return parsed;
+                }
+            } catch (error) {
+                console.warn('Unable to parse localized month names:', error);
+            }
+        }
+
+        // Fallback to Russian names
+        return ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+            'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
     }
 
     async init() {
@@ -181,8 +196,8 @@ class Calculator {
                     <div class="extra-service-item__name">${service.name}</div>
                     <div class="extra-service-item__price">
                         ${service.price_type === 'fixed'
-                ? `${service.price} ₽`
-                : `${service.price} ₽/м²`}
+                ? `${service.price} Kč`
+                : `${service.price} Kč/м²`}
                     </div>
                 </div>
             </label>
@@ -207,7 +222,7 @@ class Calculator {
                 <div class="drycleaning-item-row__info">
                     <div class="drycleaning-item-row__name">${service.name}</div>
                     <div class="drycleaning-item-row__price">
-                        ${service.unit === 'm2' ? `${service.price} ₽/м²` : `${service.price} ₽`}
+                        ${service.unit === 'm2' ? `${service.price} Kč/м²` : `${service.price} Kč`}
                     </div>
                 </div>
                 <div class="drycleaning-item-row__quantity">
@@ -256,6 +271,7 @@ class Calculator {
 
         this.currentStep = step;
         this.updateStepIndicator();
+        this.scrollToCalculatorTop();
 
         // Update parameters visibility based on service type
         if (step === 3) {
@@ -274,6 +290,20 @@ class Calculator {
         if (step === 4) {
             this.buildOrderSummary();
         }
+    }
+
+    scrollToCalculatorTop() {
+        const calculatorSection = document.getElementById('calculator');
+        if (!calculatorSection) return;
+
+        const header = document.getElementById('header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        const topOffset = calculatorSection.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+
+        window.scrollTo({
+            top: Math.max(topOffset, 0),
+            behavior: 'smooth'
+        });
     }
 
     updateStepIndicator() {
@@ -343,7 +373,7 @@ class Calculator {
                 maximumFractionDigits: 0
             }).format(Math.round(finalPrice));
 
-            priceDisplay.textContent = `${formattedPrice} ₽`;
+            priceDisplay.textContent = `${formattedPrice} Kč`;
 
             // Store for order
             this.calculatedPrice = Math.round(finalPrice);
@@ -351,12 +381,12 @@ class Calculator {
 
             // Show old price if discount
             if (this.selectedDiscount > 0) {
-                oldPriceDisplay.textContent = `${Math.round(originalPrice)} ₽`;
+                oldPriceDisplay.textContent = `${Math.round(originalPrice)} Kč`;
                 oldPriceDisplay.style.display = 'block';
                 discountInfo.textContent = `Скидка ${this.selectedDiscount}%`;
                 discountInfo.style.display = 'block';
             } else if (data.old_price) {
-                oldPriceDisplay.textContent = `${Math.round(parseFloat(data.old_price))} ₽`;
+                oldPriceDisplay.textContent = `${Math.round(parseFloat(data.old_price))} Kč`;
                 oldPriceDisplay.style.display = 'block';
                 discountInfo.style.display = 'none';
             } else {
@@ -419,10 +449,39 @@ class Calculator {
         }
 
         itemsEl.innerHTML = html;
-        totalEl.textContent = `${this.calculatedPrice || 0} ₽`;
+        totalEl.textContent = `${this.calculatedPrice || 0} Kč`;
+    }
+
+    getCsrfToken() {
+        const name = 'csrftoken=';
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookies = decodedCookie.split(';');
+        for (let cookie of cookies) {
+            let c = cookie.trim();
+            if (c.startsWith(name)) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return '';
+    }
+
+    setSubmittingState(isSubmitting) {
+        this.isSubmitting = isSubmitting;
+        const submitBtn = document.getElementById('submit-whatsapp');
+        if (submitBtn) {
+            submitBtn.disabled = isSubmitting;
+            submitBtn.classList.toggle('btn--loading', isSubmitting);
+            submitBtn.setAttribute('aria-busy', isSubmitting ? 'true' : 'false');
+        }
     }
 
     async submitToWhatsApp() {
+        if (this.isSubmitting) {
+            return;
+        }
+
+        this.setSubmittingState(true);
+
         const nameInput = document.getElementById('name');
         const phoneInput = document.getElementById('phone');
         const addressInput = document.getElementById('address');
@@ -432,6 +491,7 @@ class Calculator {
         // Validate
         if (!nameInput.value.trim() || !phoneInput.value.trim()) {
             alert('Пожалуйста, заполните имя и телефон');
+            this.setSubmittingState(false);
             return;
         }
 
@@ -468,10 +528,10 @@ class Calculator {
             message += `🎉 Скидка: ${this.selectedDiscount}%\n`;
         }
 
-        message += `\n💰 ИТОГО: ${this.calculatedPrice} ₽`;
+        message += `\n💰 ИТОГО: ${this.calculatedPrice} Kč`;
 
         if (this.selectedDiscount > 0) {
-            message += ` (было ${this.originalPrice} ₽)`;
+            message += ` (было ${this.originalPrice} Kč)`;
         }
 
         if (commentInput.value) {
@@ -479,13 +539,24 @@ class Calculator {
         }
 
         // Get WhatsApp number
-        const whatsappNumber = window.WHATSAPP_NUMBER || '';
+        let whatsappNumber = window.WHATSAPP_NUMBER || '';
+        // Fallback to founder's number
+        if (!whatsappNumber) {
+            whatsappNumber = "77077801708";
+        }
+
         const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
 
         if (!cleanNumber) {
-            alert('WhatsApp номер не настроен');
+            console.error('WhatsApp number missing even after fallback');
+            alert('Ошибка конфигурации WhatsApp');
             return;
         }
+
+        // Open WhatsApp immediately with local message (параллельно сохраняем заявку)
+        const fallbackEncodedMessage = encodeURIComponent(message);
+        const fallbackWhatsappUrl = `https://wa.me/${cleanNumber}?text=${fallbackEncodedMessage}`;
+        window.open(fallbackWhatsappUrl, '_blank');
 
         // Try to save order to backend first
         try {
@@ -494,34 +565,42 @@ class Calculator {
                 phone: phoneInput.value,
                 address: addressInput.value || null,
                 level: this.serviceType === 'cleaning' ? this.level : 'basic',
-                area: this.serviceType === 'cleaning' ? this.area : 0,
+                area: this.serviceType === 'cleaning' ? this.area : 1,
                 rooms: 0,
                 bathrooms: 0,
                 total_price: this.calculatedPrice,
                 desired_date: this.selectedDate || null,
                 desired_time: timeInput.value || null,
                 applied_discount_percent: this.selectedDiscount,
-                comment: commentInput.value || null
+                comment: commentInput.value || null,
+                service_type: this.serviceType
             };
 
-            await fetch('/api/orders/', {
+            const response = await fetch('/api/orders/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': this.getCsrfToken(),
+                },
+                credentials: 'same-origin',
                 body: JSON.stringify(orderData)
             });
+
+            const result = await response.json();
+            if (!response.ok || !result.success) {
+                throw new Error(result.error || 'Не удалось сохранить заявку');
+            }
         } catch (error) {
             console.error('Error saving order:', error);
+            alert('Не удалось сохранить заявку. Попробуйте ещё раз или свяжитесь с нами по телефону.');
+            this.setSubmittingState(false);
+            return;
         }
-
-        // Open WhatsApp
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodedMessage}`;
-
-        window.open(whatsappUrl, '_blank');
 
         // Show success
         document.querySelectorAll('.calculator-step').forEach(el => el.style.display = 'none');
         document.getElementById('order-success').style.display = 'block';
+        this.setSubmittingState(false);
     }
 
     // ==================== Event Binding ====================

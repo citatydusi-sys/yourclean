@@ -1,0 +1,774 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-24 19:02+0500\n"
+"PO-Revision-Date: 2026-01-24 16:30+0500\n"
+"Last-Translator: YourClean Team <support@yourclean.cz>\n"
+"Language-Team: Czech <support@yourclean.cz>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n % "
+"1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#: .\calculator\templates\base.html:9
+msgid "Профессиональная уборка квартир, домов и офисов — YourClean"
+msgstr "Profesionální úklid bytů, domů a kanceláří — YourClean"
+
+#: .\calculator\templates\base.html:48 .\calculator\templates\base.html:107
+#: .\calculator\templates\base.html:184
+msgid "Главная"
+msgstr "Domů"
+
+#: .\calculator\templates\base.html:50 .\calculator\templates\base.html:108
+#: .\calculator\templates\base.html:185
+#: .\calculator\templates\calculator\about.html:12
+msgid "О нас"
+msgstr "O nás"
+
+#: .\calculator\templates\base.html:52
+msgid "Рассчитать"
+msgstr "Spočítat"
+
+#: .\calculator\templates\base.html:84
+msgid "Открыть меню"
+msgstr "Otevřít menu"
+
+#: .\calculator\templates\base.html:99
+msgid "Меню"
+msgstr "Menu"
+
+#: .\calculator\templates\base.html:100
+msgid "Закрыть меню"
+msgstr "Zavřít menu"
+
+#: .\calculator\templates\base.html:110 .\calculator\templates\base.html:186
+#: .\calculator\templates\calculator\calculator.html:13
+#: .\calculator\templates\calculator\home.html:184
+msgid "Рассчитать стоимость"
+msgstr "Spočítat cenu"
+
+#: .\calculator\templates\base.html:129
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+#: .\calculator\templates\base.html:151
+msgid ""
+"Профессиональная уборка квартир, домов и офисов. Химчистка мебели и ковров."
+msgstr "Profesionální úklid bytů, domů a kanceláří. Čištění nábytku a koberců"
+
+#: .\calculator\templates\base.html:182
+msgid "Навигация"
+msgstr "Navigace"
+
+#: .\calculator\templates\base.html:190
+msgid "Услуги"
+msgstr "Služby"
+
+#: .\calculator\templates\base.html:192
+msgid "Квартиры и дома"
+msgstr "Byty a domy"
+
+#: .\calculator\templates\base.html:193
+msgid "Химчистка мебели"
+msgstr "Čištění nábytku"
+
+#: .\calculator\templates\base.html:194
+msgid "Уборка офисов"
+msgstr "Úklid kanceláří"
+
+#: .\calculator\templates\base.html:198
+msgid "Контакты"
+msgstr "Kontakty"
+
+#: .\calculator\templates\base.html:205
+#: .\calculator\templates\calculator\calculator.html:278
+msgid "Телефон"
+msgstr "Telefon"
+
+#: .\calculator\templates\base.html:215
+msgid "Email"
+msgstr "E-mail"
+
+#: .\calculator\templates\base.html:226
+#: .\calculator\templates\calculator\calculator.html:285
+msgid "Адрес"
+msgstr "Adresa"
+
+#: .\calculator\templates\base.html:234
+msgid "График"
+msgstr "Pracovní doba"
+
+#: .\calculator\templates\base.html:236
+msgid "Ежедневно 08:00 — 22:00"
+msgstr "Denně 08:00 — 22:00"
+
+#: .\calculator\templates\base.html:237
+msgid "Работаем без выходных"
+msgstr "Pracujeme bez volna"
+
+#: .\calculator\templates\base.html:239
+msgid "Обратная связь"
+msgstr "Zpětná vazba"
+
+#: .\calculator\templates\base.html:241
+msgid "Ваш email"
+msgstr "Váš e-mail"
+
+#: .\calculator\templates\base.html:242
+msgid "Отправить"
+msgstr "Odeslat"
+
+#: .\calculator\templates\base.html:244
+msgid "Ответим в течение 15 минут."
+msgstr "Odpovíme do 15 minut."
+
+#: .\calculator\templates\base.html:250
+msgid "Все права защищены."
+msgstr "Všechna práva vyhrazena."
+
+#: .\calculator\templates\base.html:267
+msgid "Позвонить"
+msgstr "Zavolat"
+
+#: .\calculator\templates\calculator\about.html:4
+msgid "О компании — YourClean"
+msgstr "O společnosti — YourClean"
+
+#: .\calculator\templates\calculator\about.html:5
+msgid ""
+"Узнайте больше о клининговой компании YourClean. Наши услуги, цены, галерея "
+"работ до/после."
+msgstr ""
+"Zjistěte více o úklidové společnosti YourClean. Naše služby, ceny a galerie "
+"před/po."
+
+#: .\calculator\templates\calculator\about.html:13
+msgid "Профессиональный клининг с гарантией качества"
+msgstr "Profesionální úklid s garancí kvality"
+
+#: .\calculator\templates\calculator\about.html:14
+msgid ""
+"Мы — команда профессионалов с многолетним опытом работы. Используем "
+"современное оборудование и безопасные средства."
+msgstr ""
+"Jsme tým profesionálů s mnohaletými zkušenostmi. Používáme moderní vybavení "
+"a bezpečné prostředky."
+
+#: .\calculator\templates\calculator\about.html:24
+msgid "Почему выбирают нас?"
+msgstr "Proč nás vybírají?"
+
+#: .\calculator\templates\calculator\about.html:25
+msgid ""
+"Клининговая компания YourClean оказывает полный спектр услуг по уборке жилых "
+"и нежилых помещений любой сложности."
+msgstr ""
+"Úklidová společnost YourClean poskytuje kompletní spektrum služeb pro úklid "
+"obytných i komerčních prostor jakékoli náročnosti."
+
+#: .\calculator\templates\calculator\about.html:29
+msgid "Берём ответственность на себя"
+msgstr "Přebíráme odpovědnost na sebe"
+
+#: .\calculator\templates\calculator\about.html:33
+msgid "Работаем официально, по договору"
+msgstr "Pracujeme oficiálně, na smlouvu"
+
+#: .\calculator\templates\calculator\about.html:37
+msgid "Решим любую задачу в срок"
+msgstr "Vyřešíme jakýkoli úkol včas"
+
+#: .\calculator\templates\calculator\about.html:41
+msgid "Опытный персонал"
+msgstr "Zkušený personál"
+
+#: .\calculator\templates\calculator\about.html:45
+msgid "Лучшее оборудование и профессиональная химия"
+msgstr "Nejlepší vybavení a profesionální chemie"
+
+#: .\calculator\templates\calculator\about.html:52
+msgid "лет на рынке"
+msgstr "let na trhu"
+
+#: .\calculator\templates\calculator\about.html:56
+msgid "довольных клиентов"
+msgstr "spokojených klientů"
+
+#: .\calculator\templates\calculator\about.html:60
+msgid "м² убрано"
+msgstr "m² uklizeno"
+
+#: .\calculator\templates\calculator\about.html:64
+msgid "гарантия"
+msgstr "záruka"
+
+#: .\calculator\templates\calculator\about.html:77
+msgid "Галерея"
+msgstr "Galerie"
+
+#: .\calculator\templates\calculator\about.html:78
+msgid "Результаты нашей работы"
+msgstr "Výsledky naší práce"
+
+#: .\calculator\templates\calculator\about.html:79
+msgid "До и после — убедитесь в качестве сами"
+msgstr "Před a po — přesvědčte se o kvalitě sami"
+
+#: .\calculator\templates\calculator\about.html:88
+#, fuzzy
+#| msgid "Тип уборки"
+msgid "До уборки"
+msgstr "Typ úklidu"
+
+#: .\calculator\templates\calculator\about.html:89
+msgid "До"
+msgstr "Před"
+
+#: .\calculator\templates\calculator\about.html:92
+msgid "После уборки"
+msgstr "Po úklidu"
+
+#: .\calculator\templates\calculator\about.html:93
+msgid "После"
+msgstr "Po"
+
+#: .\calculator\templates\calculator\calculator.html:4
+msgid "Калькулятор стоимости — YourClean"
+msgstr "Kalkulačka ceny — YourClean"
+
+#: .\calculator\templates\calculator\calculator.html:5
+#, fuzzy
+#| msgid ""
+#| "Рассчитайте стоимость онлайн и получите подтверждение в WhatsApp за пару "
+#| "минут."
+msgid ""
+"Рассчитайте стоимость уборки онлайн. Выберите дату, тип услуги и получите "
+"цену сразу."
+msgstr ""
+"Spočítejte cenu online a získejte potvrzení ve WhatsApp během pár minut."
+
+#: .\calculator\templates\calculator\calculator.html:12
+msgid "Онлайн калькулятор"
+msgstr "Online kalkulačka"
+
+#: .\calculator\templates\calculator\calculator.html:15
+msgid "Выберите дату, тип услуги и параметры — мгновенно узнаете точную цену"
+msgstr "Vyberte datum, typ služby a parametry – okamžitě zjistíte přesnou cenu"
+
+#: .\calculator\templates\calculator\calculator.html:28
+msgid "Дата"
+msgstr "Datum"
+
+#: .\calculator\templates\calculator\calculator.html:32
+msgid "Услуга"
+msgstr "Služba"
+
+#: .\calculator\templates\calculator\calculator.html:36
+#: .\calculator\templates\calculator\calculator.html:150
+msgid "Параметры"
+msgstr "Parametry"
+
+#: .\calculator\templates\calculator\calculator.html:40
+#, fuzzy
+#| msgid "Ваш заказ"
+msgid "Заказ"
+msgstr "Objednávka"
+
+#: .\calculator\templates\calculator\calculator.html:50
+msgid "Выберите дату"
+msgstr "Vyberte datum"
+
+#: .\calculator\templates\calculator\calculator.html:51
+msgid "Некоторые даты имеют специальные скидки"
+msgstr "Některá data mají speciální slevy"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Январь"
+msgstr "Leden"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Февраль"
+msgstr "Únor"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Март"
+msgstr "Březen"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Апрель"
+msgstr "Duben"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Май"
+msgstr "Květen"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Июнь"
+msgstr "Červen"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Июль"
+msgstr "Červenec"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Август"
+msgstr "Srpen"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Сентябрь"
+msgstr "Září"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Октябрь"
+msgstr "Říjen"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Ноябрь"
+msgstr "Listopad"
+
+#: .\calculator\templates\calculator\calculator.html:55
+msgid "Декабрь"
+msgstr "Prosinec"
+
+#: .\calculator\templates\calculator\calculator.html:70
+msgid "Пн"
+msgstr "Po"
+
+#: .\calculator\templates\calculator\calculator.html:70
+msgid "Вт"
+msgstr "Út"
+
+#: .\calculator\templates\calculator\calculator.html:70
+msgid "Ср"
+msgstr "St"
+
+#: .\calculator\templates\calculator\calculator.html:70
+msgid "Чт"
+msgstr "Čt"
+
+#: .\calculator\templates\calculator\calculator.html:70
+msgid "Пт"
+msgstr "Pá"
+
+#: .\calculator\templates\calculator\calculator.html:70
+msgid "Сб"
+msgstr "So"
+
+#: .\calculator\templates\calculator\calculator.html:70
+msgid "Вс"
+msgstr "Ne"
+
+#: .\calculator\templates\calculator\calculator.html:82
+#, fuzzy
+#| msgid "м² убрано"
+msgid "Выбрано"
+msgstr "Vybráno"
+
+#: .\calculator\templates\calculator\calculator.html:93
+#: .\calculator\templates\calculator\calculator.html:138
+msgid "Далее"
+msgstr "Další"
+
+#: .\calculator\templates\calculator\calculator.html:105
+msgid "Выберите услугу"
+msgstr "Vyberte službu"
+
+#: .\calculator\templates\calculator\calculator.html:106
+msgid "Клининг или химчистка?"
+msgstr "Úklid nebo chemické čištění?"
+
+#: .\calculator\templates\calculator\calculator.html:114
+msgid "Уборка"
+msgstr "Úklid"
+
+#: .\calculator\templates\calculator\calculator.html:115
+msgid "Генеральная и поддерживающая уборка помещений"
+msgstr "Hloubkový úklid a udržovací úklid prostor"
+
+#: .\calculator\templates\calculator\calculator.html:123
+msgid "Химчистка"
+msgstr "Chemické čištění"
+
+#: .\calculator\templates\calculator\calculator.html:124
+msgid "Химчистка мебели, ковров, матрасов"
+msgstr "Chemické čištění nábytku, koberců a matrací"
+
+#: .\calculator\templates\calculator\calculator.html:135
+#: .\calculator\templates\calculator\calculator.html:239
+#: .\calculator\templates\calculator\calculator.html:322
+msgid "Назад"
+msgstr "Zpět"
+
+#: .\calculator\templates\calculator\calculator.html:151
+msgid "Укажите детали вашего заказа"
+msgstr "Uveďte detaily své objednávky"
+
+#: .\calculator\templates\calculator\calculator.html:158
+msgid "Тип уборки"
+msgstr "Typ úklidu"
+
+#: .\calculator\templates\calculator\calculator.html:169
+msgid "BASIC — Поддерживающая уборка"
+msgstr "BASIC — Udržovací úklid"
+
+#: .\calculator\templates\calculator\calculator.html:170
+msgid "Быстрая уборка для поддержания чистоты"
+msgstr "Rychlý úklid pro udržení čistoty"
+
+#: .\calculator\templates\calculator\calculator.html:173
+#, fuzzy
+#| msgid "GENERAL+ — Премиум уборка"
+msgid "GENERAL — Генеральная уборка"
+msgstr "GENERAL — Hloubkový úklid"
+
+#: .\calculator\templates\calculator\calculator.html:174
+msgid "Глубокая уборка с детальной обработкой"
+msgstr "Hloubkový úklid s detailním čištěním"
+
+#: .\calculator\templates\calculator\calculator.html:177
+msgid "GENERAL+ — Премиум уборка"
+msgstr "GENERAL+ — Prémiový úklid"
+
+#: .\calculator\templates\calculator\calculator.html:178
+msgid "Максимально тщательная уборка с химчисткой"
+msgstr "Maximální pečlivý úklid s chemickým čištěním"
+
+#: .\calculator\templates\calculator\calculator.html:184
+msgid "Площадь (м²)"
+msgstr "Plocha (m²)"
+
+#: .\calculator\templates\calculator\calculator.html:187
+msgid "Введите площадь"
+msgstr "Zadejte plochu"
+
+#: .\calculator\templates\calculator\calculator.html:188
+msgid "м²"
+msgstr "m²"
+
+#: .\calculator\templates\calculator\calculator.html:194
+msgid "20 м²"
+msgstr "20 m²"
+
+#: .\calculator\templates\calculator\calculator.html:195
+msgid "200 м²"
+msgstr "200 m²"
+
+#: .\calculator\templates\calculator\calculator.html:202
+#, fuzzy
+#| msgid "Заполните контактные данные"
+msgid "Дополнительные услуги"
+msgstr "Vyplňte kontaktní údaje"
+
+#: .\calculator\templates\calculator\calculator.html:212
+#, fuzzy
+#| msgid "Выберите время"
+msgid "Выберите объекты химчистки"
+msgstr "Vyberte čas"
+
+#: .\calculator\templates\calculator\calculator.html:221
+msgid "Итого"
+msgstr "Celkem"
+
+#: .\calculator\templates\calculator\calculator.html:230
+msgid "Точная цена после осмотра"
+msgstr "Přesná cena po prohlídce"
+
+#: .\calculator\templates\calculator\calculator.html:242
+#: .\calculator\templates\calculator\calculator.html:315
+msgid "Оформить заказ"
+msgstr "Odeslat objednávku"
+
+#: .\calculator\templates\calculator\calculator.html:254
+msgid "Оформление заказа"
+msgstr "Vyřízení objednávky"
+
+#: .\calculator\templates\calculator\calculator.html:255
+msgid "Заполните контактные данные"
+msgstr "Vyplňte kontaktní údaje"
+
+#: .\calculator\templates\calculator\calculator.html:260
+msgid "Ваш заказ"
+msgstr "Vaše objednávka"
+
+#: .\calculator\templates\calculator\calculator.html:265
+msgid "Итого:"
+msgstr "Celkem:"
+
+#: .\calculator\templates\calculator\calculator.html:273
+msgid "Имя"
+msgstr "Jméno"
+
+#: .\calculator\templates\calculator\calculator.html:274
+msgid "Ваше имя"
+msgstr "Vaše jméno"
+
+#: .\calculator\templates\calculator\calculator.html:287
+msgid "Улица, дом, квартира"
+msgstr "Ulice, číslo, byt"
+
+#: .\calculator\templates\calculator\calculator.html:291
+msgid "Удобное время"
+msgstr "Vhodný čas"
+
+#: .\calculator\templates\calculator\calculator.html:293
+msgid "Выберите время"
+msgstr "Vyberte čas"
+
+#: .\calculator\templates\calculator\calculator.html:303
+msgid "Комментарий"
+msgstr "Komentář"
+
+#: .\calculator\templates\calculator\calculator.html:305
+msgid "Особые пожелания..."
+msgstr "Speciální přání..."
+
+#: .\calculator\templates\calculator\calculator.html:335
+msgid "Заказ отправлен!"
+msgstr "Objednávka odeslána!"
+
+#: .\calculator\templates\calculator\calculator.html:336
+msgid "Спасибо! Мы свяжемся с вами в ближайшее время."
+msgstr "Děkujeme! Brzy se vám ozveme."
+
+#: .\calculator\templates\calculator\calculator.html:338
+msgid "На главную"
+msgstr "Na hlavní stránku"
+
+#: .\calculator\templates\calculator\home.html:4
+msgid "YourClean — Профессиональная уборка"
+msgstr "YourClean — Profesionální úklid"
+
+#: .\calculator\templates\calculator\home.html:5
+msgid ""
+"Профессиональная уборка квартир, домов и офисов. Качественно, быстро, "
+"недорого. Рассчитайте стоимость онлайн!"
+msgstr ""
+"Profesionální úklid bytů, domů a kanceláří. Kvalitně, rychle a za dobrou "
+"cenu. Spočítejte si cenu online!"
+
+#: .\calculator\templates\calculator\home.html:13
+msgid "УБОРКА ПОМЕЩЕНИЙ И ХИМЧИСТКА МЕБЕЛИ"
+msgstr "ÚKLID PROSTOR A ČIŠTĚNÍ NÁBYTKU"
+
+#: .\calculator\templates\calculator\home.html:18
+msgid "Оставить заявку"
+msgstr "Odeslat poptávku"
+
+#: .\calculator\templates\calculator\home.html:51
+msgid "Профессионализм"
+msgstr "Profesionalita"
+
+#: .\calculator\templates\calculator\home.html:52
+msgid "Опытные специалисты с профессиональным оборудованием"
+msgstr "Zkušení specialisté s profesionálním vybavením"
+
+#: .\calculator\templates\calculator\home.html:58
+msgid "Гарантия качества"
+msgstr "Záruka kvality"
+
+#: .\calculator\templates\calculator\home.html:59
+msgid "Если не понравится, переделаем бесплатно"
+msgstr "Pokud nebudete spokojeni, zdarma vše napravíme"
+
+#: .\calculator\templates\calculator\home.html:65
+msgid "Честные цены"
+msgstr "Čestné ceny"
+
+#: .\calculator\templates\calculator\home.html:66
+msgid "Фиксированная стоимость без скрытых платежей"
+msgstr "Fixní cena bez skrytých poplatků"
+
+#: .\calculator\templates\calculator\home.html:72
+msgid "Эко-средства"
+msgstr "Eko prostředky"
+
+#: .\calculator\templates\calculator\home.html:73
+msgid "Безопасная химия для детей и животных"
+msgstr "Bezpečná chemie pro děti i domácí mazlíčky"
+
+#: .\calculator\templates\calculator\home.html:85
+msgid "Наши услуги"
+msgstr "Naše služby"
+
+#: .\calculator\templates\calculator\home.html:86
+msgid "Выберите подходящий вариант для вашего помещения"
+msgstr "Vyberte vhodnou variantu pro svůj prostor"
+
+#: .\calculator\templates\calculator\home.html:126
+msgid "Отзывы"
+msgstr "Recenze"
+
+#: .\calculator\templates\calculator\home.html:127
+msgid "Что говорят наши клиенты"
+msgstr "Co říkají naši klienti"
+
+#: .\calculator\templates\calculator\home.html:170
+msgid "Свободные окна на этой неделе"
+msgstr "Volné termíny tento týden"
+
+#: .\calculator\templates\calculator\home.html:171
+msgid "Готовы к чистоте?"
+msgstr "Připraveni na čistotu?"
+
+#: .\calculator\templates\calculator\home.html:172
+msgid ""
+"Рассчитайте стоимость онлайн и получите подтверждение в WhatsApp за пару "
+"минут."
+msgstr ""
+"Spočítejte cenu online a získejte potvrzení ve WhatsApp během pár minut."
+
+#: .\calculator\templates\calculator\home.html:176
+msgid "Рейтинг клиентов"
+msgstr "Hodnocení klientů"
+
+#: .\calculator\templates\calculator\home.html:180
+msgid "Уборок в Праге"
+msgstr "Úklidů v Praze"
+
+#: .\calculator\templates\calculator\home.html:192
+msgid "Ваш персональный менеджер"
+msgstr "Váš osobní manažer"
+
+#: .\calculator\templates\calculator\home.html:197
+msgid "Выезд в день обращения"
+msgstr "Příjezd v den objednávky"
+
+#: .\calculator\templates\calculator\home.html:201
+msgid "Собственная химия и оборудование"
+msgstr "Vlastní chemie a vybavení"
+
+#: .\calculator\templates\calculator\home.html:205
+msgid "Гарантия качества 48 часов"
+msgstr "48hodinová záruka kvality"
+
+#: .\calculator\templates\calculator\home.html:221
+msgid "Наши работы"
+msgstr "Naše práce"
+
+#: .\calculator\templates\calculator\home.html:222
+msgid "Как мы наводим порядок"
+msgstr "Jak dáváme věci do pořádku"
+
+#: .\calculator\templates\calculator\home.html:223
+msgid ""
+"Несколько кадров из реальных выездов: химчистка мягкой мебели, паровая "
+"уборка и аккуратная полировка поверхностей."
+msgstr ""
+"Několik záběrů z reálných výjezdů: čištění čalouněného nábytku, parní úklid "
+"a precizní leštění povrchů."
+
+#: .\calculator\templates\calculator\home.html:229
+#: .\calculator\templates\calculator\home.html:241
+#, fuzzy
+#| msgid "Химчистка мебели"
+msgid "Глубокая химчистка дивана"
+msgstr "Hloubkové chemické čištění pohovky"
+
+#: .\calculator\templates\calculator\home.html:236
+#: .\calculator\templates\calculator\home.html:259
+#: .\calculator\templates\calculator\home.html:282
+#: .\calculator\templates\calculator\home.html:305
+#: .\calculator\templates\calculator\home.html:328
+msgid "Посмотреть"
+msgstr "Zobrazit"
+
+#: .\calculator\templates\calculator\home.html:242
+msgid "Прага 2 • Экстрактор Kärcher • 3 часа"
+msgstr "Praha 2 • Extraktor Kärcher • 3 hodiny"
+
+#: .\calculator\templates\calculator\home.html:244
+msgid "Мебель"
+msgstr "Nábytek"
+
+#: .\calculator\templates\calculator\home.html:252
+#: .\calculator\templates\calculator\home.html:264
+msgid "Полировка столешницы"
+msgstr "Leštění pracovní desky"
+
+#: .\calculator\templates\calculator\home.html:265
+msgid "Прага 1 • Дерево и камень"
+msgstr "Praha 1 • Dřevo a kámen"
+
+#: .\calculator\templates\calculator\home.html:267
+msgid "Полировка"
+msgstr "Leštění"
+
+#: .\calculator\templates\calculator\home.html:268
+msgid "Камень"
+msgstr "Kámen"
+
+#: .\calculator\templates\calculator\home.html:275
+#, fuzzy
+#| msgid "После уборки"
+msgid "Паровая уборка"
+msgstr "Parní úklid"
+
+#: .\calculator\templates\calculator\home.html:287
+#, fuzzy
+#| msgid "После уборки"
+msgid "Паровая уборка пола"
+msgstr "Parní úklid podlahy"
+
+#: .\calculator\templates\calculator\home.html:288
+#, fuzzy
+#| msgid "Эко-средства"
+msgid "Прага 5 • Эко-средства"
+msgstr "Praha 5 • Eko prostředky"
+
+#: .\calculator\templates\calculator\home.html:290
+msgid "Пар"
+msgstr "Pára"
+
+#: .\calculator\templates\calculator\home.html:291
+msgid "Эко"
+msgstr "Eko"
+
+#: .\calculator\templates\calculator\home.html:298
+#: .\calculator\templates\calculator\home.html:310
+msgid "Фирменный сервис"
+msgstr "Firemní servis"
+
+#: .\calculator\templates\calculator\home.html:311
+msgid "Тот самый YourClean"
+msgstr "Ten pravý YourClean"
+
+#: .\calculator\templates\calculator\home.html:313
+msgid "Премиум"
+msgstr "Premium"
+
+#: .\calculator\templates\calculator\home.html:321
+#: .\calculator\templates\calculator\home.html:333
+msgid "Команда в действии"
+msgstr "Tým v akci"
+
+#: .\calculator\templates\calculator\home.html:334
+msgid "ЖК River Park • Поддерживающая уборка"
+msgstr "Rezidence River Park • Udržovací úklid"
+
+#: .\calculator\templates\calculator\home.html:336
+msgid "Команда"
+msgstr "Tým"
+
+#: .\calculator\templates\calculator\home.html:337
+msgid "Офис"
+msgstr "Kancelář"
+
+#: .\yourclean\settings.py:145
+msgid "Русский"
+msgstr "Ruština"
+
+#: .\yourclean\settings.py:146
+msgid "English"
+msgstr "Angličtina"
+
+#: .\yourclean\settings.py:147
+msgid "Čeština"
+msgstr "Čeština"

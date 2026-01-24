@@ -1,24 +1,21 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}YourClean — Профессиональная уборка{% endblock %}
-{% block meta_description %}Профессиональная уборка квартир, домов и офисов. Качественно, быстро, недорого. Рассчитайте
-стоимость онлайн!{% endblock %}
+{% block title %}{% trans "YourClean — Профессиональная уборка" %}{% endblock %}
+{% block meta_description %}{% trans "Профессиональная уборка квартир, домов и офисов. Качественно, быстро, недорого. Рассчитайте стоимость онлайн!" %}{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero hero--home" style="background-image: url('/static/calculator/images/hero-bg.png');">
+<section class="hero hero--home" style="background-image: url('/static/calculator/images/IMG_8777.PNG');">
     <div class="container">
         <div class="hero__content">
             <h1 class="hero__title animate-fade-in-up">
-                КОМПЛЕКСНОЕ ОКАЗАНИЕ УСЛУГ<br>
-                ПО УБОРКЕ И ОБСЛУЖИВАНИЮ<br>
-                ПОМЕЩЕНИЙ
+                {% trans "УБОРКА ПОМЕЩЕНИЙ И ХИМЧИСТКА МЕБЕЛИ" %}<br>
             </h1>
 
             <div class="hero__actions animate-fade-in-up">
                 <a href="{% url 'calculator:calculator' %}" class="btn btn--green btn--xl">
-                    Оставить заявку
+                    {% trans "Оставить заявку" %}
                 </a>
             </div>
         </div>
@@ -51,29 +48,29 @@
             <div class="advantage-card animate-fade-in-up">
                 <div class="advantage-card__icon"><span>✨</span></div>
                 <div class="advantage-card__content">
-                    <h3 class="advantage-card__title">Профессионализм</h3>
-                    <p class="advantage-card__text">Опытные специалисты с профессиональным оборудованием</p>
+                    <h3 class="advantage-card__title">{% trans "Профессионализм" %}</h3>
+                    <p class="advantage-card__text">{% trans "Опытные специалисты с профессиональным оборудованием" %}</p>
                 </div>
             </div>
             <div class="advantage-card animate-fade-in-up" style="animation-delay: 100ms">
                 <div class="advantage-card__icon"><span>🛡️</span></div>
                 <div class="advantage-card__content">
-                    <h3 class="advantage-card__title">Гарантия качества</h3>
-                    <p class="advantage-card__text">Если не понравится, переделаем бесплатно</p>
+                    <h3 class="advantage-card__title">{% trans "Гарантия качества" %}</h3>
+                    <p class="advantage-card__text">{% trans "Если не понравится, переделаем бесплатно" %}</p>
                 </div>
             </div>
             <div class="advantage-card animate-fade-in-up" style="animation-delay: 200ms">
                 <div class="advantage-card__icon"><span>💰</span></div>
                 <div class="advantage-card__content">
-                    <h3 class="advantage-card__title">Честные цены</h3>
-                    <p class="advantage-card__text">Фиксированная стоимость без скрытых платежей</p>
+                    <h3 class="advantage-card__title">{% trans "Честные цены" %}</h3>
+                    <p class="advantage-card__text">{% trans "Фиксированная стоимость без скрытых платежей" %}</p>
                 </div>
             </div>
             <div class="advantage-card animate-fade-in-up" style="animation-delay: 300ms">
                 <div class="advantage-card__icon"><span>🌿</span></div>
                 <div class="advantage-card__content">
-                    <h3 class="advantage-card__title">Эко-средства</h3>
-                    <p class="advantage-card__text">Безопасная химия для детей и животных</p>
+                    <h3 class="advantage-card__title">{% trans "Эко-средства" %}</h3>
+                    <p class="advantage-card__text">{% trans "Безопасная химия для детей и животных" %}</p>
                 </div>
             </div>
         </div>
@@ -85,17 +82,20 @@
 <section class="services-section section bg-alt">
     <div class="container">
         <div class="section__header">
-            <h2 class="section__title">Наши услуги</h2>
-            <p class="section__subtitle">Выберите подходящий вариант для вашего помещения</p>
+            <h2 class="section__title">{% trans "Наши услуги" %}</h2>
+            <p class="section__subtitle">{% trans "Выберите подходящий вариант для вашего помещения" %}</p>
         </div>
 
         <div class="services-grid-eco">
             {% for service in cleaning_types %}
             <div class="service-card-eco animate-fade-in-up" style="animation-delay: {{ forloop.counter0 }}00ms">
                 <div class="service-card-eco__image">
-                    <!-- Фото услуги (добавьте в папку static/calculator/images/) -->
-                    <img src="{% static 'calculator/images/service-'|add:forloop.counter|add:'.jpg' %}"
-                        alt="{{ service.name }}" onerror="this.style.display='none'">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" alt="{{ service.name }}">
+                    {% else %}
+                        <img src="{% static 'calculator/images/service-'|add:forloop.counter|add:'.jpg' %}"
+                            alt="{{ service.name }}" onerror="this.style.display='none'">
+                    {% endif %}
                 </div>
                 <h3 class="service-card-eco__title">{{ service.name }}</h3>
             </div>
@@ -104,8 +104,12 @@
             {% for service in dry_cleaning_services %}
             <div class="service-card-eco animate-fade-in-up" style="animation-delay: {{ forloop.counter0|add:3 }}00ms">
                 <div class="service-card-eco__image">
-                    <img src="{% static 'calculator/images/drycleaning-'|add:forloop.counter|add:'.jpg' %}"
-                        alt="{{ service.name }}" onerror="this.style.display='none'">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" alt="{{ service.name }}">
+                    {% else %}
+                        <img src="{% static 'calculator/images/drycleaning-'|add:forloop.counter|add:'.jpg' %}"
+                            alt="{{ service.name }}" onerror="this.style.display='none'">
+                    {% endif %}
                 </div>
                 <h3 class="service-card-eco__title">{{ service.name }}</h3>
             </div>
@@ -119,8 +123,8 @@
 <section class="reviews-section section bg-alt">
     <div class="container">
         <div class="section__header">
-            <span class="section__label">Отзывы</span>
-            <h2 class="section__title">Что говорят наши клиенты</h2>
+            <span class="section__label">{% trans "Отзывы" %}</span>
+            <h2 class="section__title">{% trans "Что говорят наши клиенты" %}</h2>
         </div>
 
         <div class="reviews-carousel" id="reviews-carousel">
@@ -160,32 +164,57 @@
 {% endif %}
 
 <!-- CTA Section -->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-section__content animate-scale-in">
-            <h2 class="cta-section__title">Готовы к чистоте?</h2>
-            <p class="cta-section__text">Рассчитайте стоимость онлайн или позвоните нам</p>
-            <div class="cta-section__actions">
-                <a href="{% url 'calculator:calculator' %}" class="btn btn--white btn--xl">
-                    <span>Рассчитать стоимость</span>
-                    <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" />
-                    </svg>
-                </a>
-                {% if company_info and company_info.phone %}
-                <a href="tel:{{ company_info.phone }}" class="btn btn--outline-white btn--xl">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                        <path
-                            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-                    </svg>
-                    {{ company_info.phone }}
-                </a>
-                {% endif %}
+<section class="cta-hero">
+    <div class="cta-hero__container">
+        <div class="cta-hero__content">
+            <div class="cta-hero__badge">{% trans "Свободные окна на этой неделе" %}</div>
+            <h2 class="cta-hero__title">{% trans "Готовы к чистоте?" %}</h2>
+            <p class="cta-hero__subtitle">{% trans "Рассчитайте стоимость онлайн и получите подтверждение в WhatsApp за пару минут." %}</p>
+            <div class="cta-hero__stats">
+                <div class="cta-hero__stat-card">
+                    <span class="cta-hero__stat-number">4.9/5</span>
+                    <span class="cta-hero__stat-label">{% trans "Рейтинг клиентов" %}</span>
+                </div>
+                <div class="cta-hero__stat-card">
+                    <span class="cta-hero__stat-number">700+</span>
+                    <span class="cta-hero__stat-label">{% trans "Уборок в Праге" %}</span>
+                </div>
             </div>
+            <a href="{% url 'calculator:calculator' %}" class="cta-hero__cta">
+                {% trans "Рассчитать стоимость" %}
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+        <div class="cta-hero__card">
+            <div class="cta-hero__card-header">{% trans "Ваш персональный менеджер" %}</div>
+            <h3 class="cta-hero__card-title">YourClean</h3>
+            <ul class="cta-hero__benefits">
+                <li class="cta-hero__benefit">
+                    <div class="cta-hero__benefit-icon"></div>
+                    <span>{% trans "Выезд в день обращения" %}</span>
+                </li>
+                <li class="cta-hero__benefit">
+                    <div class="cta-hero__benefit-icon"></div>
+                    <span>{% trans "Собственная химия и оборудование" %}</span>
+                </li>
+                <li class="cta-hero__benefit">
+                    <div class="cta-hero__benefit-icon"></div>
+                    <span>{% trans "Гарантия качества 48 часов" %}</span>
+                </li>
+            </ul>
+            {% if company_info and company_info.email %}
+            <a href="mailto:{{ company_info.email }}" class="cta-hero__card-link">{{ company_info.email }}</a>
+            {% endif %}
+            {% if company_info and company_info.phone %}
+            <a href="tel:{{ company_info.phone }}" class="cta-hero__card-link">{{ company_info.phone }}</a>
+            {% endif %}
         </div>
     </div>
 </section>
+<!-- Work Showcase Section -->
 {% endblock %}
 
 {% block extra_css %}
@@ -569,14 +598,103 @@
     }
 
     /* CTA Section */
-    .cta-section__actions {
+    .cta-section {
+        position: relative;
+        padding: var(--space-20) 0;
+        background: linear-gradient(135deg, #002468 0%, #0150C1 100%);
+        color: white;
+        overflow: hidden;
+    }
+
+    .cta-section__glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.25), transparent 45%),
+            radial-gradient(circle at 80% 0%, rgba(20, 184, 166, 0.4), transparent 40%);
+        opacity: 0.8;
+        pointer-events: none;
+        filter: blur(40px);
+    }
+
+    .cta-section__grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--space-8);
+        align-items: stretch;
+    }
+
+    @media (max-width: 992px) {
+        .cta-section__grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .cta-section__content {
         display: flex;
-        gap: var(--space-4);
-        justify-content: center;
+        flex-direction: column;
+        gap: var(--space-6);
+    }
+
+    .cta-section__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-2) var(--space-4);
+        border-radius: var(--radius-full);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        font-size: var(--text-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .cta-section__title {
+        font-family: var(--font-heading);
+        font-size: clamp(2.2rem, 5vw, 3rem);
+        font-weight: var(--font-extrabold);
+        margin: 0;
+    }
+
+    .cta-section__text {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: var(--text-lg);
+        max-width: 520px;
+    }
+
+    .cta-section__stats {
+        display: flex;
+        gap: var(--space-6);
         flex-wrap: wrap;
     }
 
-    /* Button variants */
+    .cta-stat {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-xl);
+        padding: var(--space-4) var(--space-6);
+        min-width: 160px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .cta-stat__value {
+        display: block;
+        font-size: var(--text-3xl);
+        font-weight: var(--font-bold);
+        line-height: 1.1;
+    }
+
+    .cta-stat__label {
+        font-size: var(--text-sm);
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .cta-section__actions {
+        display: flex;
+        gap: var(--space-4);
+        flex-wrap: wrap;
+    }
+
     .btn--outline-white {
         background: transparent;
         color: white;
@@ -584,8 +702,73 @@
     }
 
     .btn--outline-white:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.12);
         border-color: white;
+    }
+
+    .cta-section__card {
+        background: rgba(6, 14, 40, 0.45);
+        border-radius: var(--radius-3xl);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: var(--space-8);
+        backdrop-filter: blur(22px);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .cta-card__header span {
+        text-transform: uppercase;
+        font-size: var(--text-xs);
+        letter-spacing: 0.2em;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .cta-card__header strong {
+        display: block;
+        font-size: var(--text-2xl);
+        margin-top: var(--space-2);
+    }
+
+    .cta-card__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .cta-card__list li {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+    }
+
+    .cta-card__list li::before {
+        content: '✓';
+        color: var(--color-primary-light);
+        font-weight: var(--font-bold);
+        background: rgba(255, 255, 255, 0.08);
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+    }
+
+    .cta-card__link {
+        color: white;
+        text-decoration: none;
+        font-weight: var(--font-medium);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        width: max-content;
+        transition: color var(--transition-fast);
+    }
+
+    .cta-card__link:hover {
+        color: var(--color-primary-light);
     }
 
     /* Utilities */

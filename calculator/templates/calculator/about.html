@@ -1,21 +1,17 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}О компании — YourClean{% endblock %}
-{% block meta_description %}Узнайте больше о клининговой компании YourClean. Наши услуги, цены, галерея работ
-до/после.{% endblock %}
+{% block title %}{% trans "О компании — YourClean" %}{% endblock %}
+{% block meta_description %}{% trans "Узнайте больше о клининговой компании YourClean. Наши услуги, цены, галерея работ до/после." %}{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="page-hero">
+<section class="page-hero page-hero--overlap">
     <div class="container">
         <div class="page-hero__content">
-            <span class="page-hero__badge">О нас</span>
-            <h1 class="page-hero__title">Профессиональный клининг с гарантией качества</h1>
-            <p class="page-hero__subtitle">
-                Мы — команда профессионалов с многолетним опытом работы.
-                Используем современное оборудование и безопасные средства.
-            </p>
+            <span class="page-hero__badge">{% trans "О нас" %}</span>
+            <h1 class="page-hero__title">{% trans "Профессиональный клининг с гарантией качества" %}</h1>
+            <p class="page-hero__subtitle">{% blocktrans %}Мы — команда профессионалов с многолетним опытом работы. Используем современное оборудование и безопасные средства.{% endblocktrans %}</p>
         </div>
     </div>
 </section>
@@ -25,191 +21,48 @@
     <div class="container">
         <div class="about-company__grid">
             <div class="about-company__content">
-                <h2 class="h2">Почему выбирают нас?</h2>
-                <p class="lead">
-                    Клининговая компания YourClean оказывает полный спектр услуг по уборке
-                    жилых и нежилых помещений любой сложности.
-                </p>
+                <h2 class="h2">{% trans "Почему выбирают нас?" %}</h2>
+                <p class="lead">{% blocktrans %}Клининговая компания YourClean оказывает полный спектр услуг по уборке жилых и нежилых помещений любой сложности.{% endblocktrans %}</p>
                 <div class="about-features">
                     <div class="about-feature">
                         <div class="about-feature__icon">✓</div>
-                        <div class="about-feature__text">Берём ответственность на себя</div>
+                        <div class="about-feature__text">{% trans "Берём ответственность на себя" %}</div>
                     </div>
                     <div class="about-feature">
                         <div class="about-feature__icon">✓</div>
-                        <div class="about-feature__text">Работаем официально, по договору</div>
+                        <div class="about-feature__text">{% trans "Работаем официально, по договору" %}</div>
                     </div>
                     <div class="about-feature">
                         <div class="about-feature__icon">✓</div>
-                        <div class="about-feature__text">Решим любую задачу в срок</div>
+                        <div class="about-feature__text">{% trans "Решим любую задачу в срок" %}</div>
                     </div>
                     <div class="about-feature">
                         <div class="about-feature__icon">✓</div>
-                        <div class="about-feature__text">Опытный персонал</div>
+                        <div class="about-feature__text">{% trans "Опытный персонал" %}</div>
                     </div>
                     <div class="about-feature">
                         <div class="about-feature__icon">✓</div>
-                        <div class="about-feature__text">Лучшее оборудование и профессиональная химия</div>
+                        <div class="about-feature__text">{% trans "Лучшее оборудование и профессиональная химия" %}</div>
                     </div>
                 </div>
             </div>
             <div class="about-company__stats">
-                <div class="stat-card">
-                    <div class="stat-card__value">5+</div>
-                    <div class="stat-card__label">лет на рынке</div>
-                </div>
+                
                 <div class="stat-card">
                     <div class="stat-card__value">1000+</div>
-                    <div class="stat-card__label">довольных клиентов</div>
+                    <div class="stat-card__label">{% trans "довольных клиентов" %}</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-card__value">50k+</div>
-                    <div class="stat-card__label">м² убрано</div>
+                    <div class="stat-card__label">{% trans "м² убрано" %}</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-card__value">100%</div>
-                    <div class="stat-card__label">гарантия</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Services & Prices -->
-<section class="services-section section bg-alt" id="services">
-    <div class="container">
-        <div class="section__header">
-            <span class="section__label">Услуги</span>
-            <h2 class="section__title">Наши услуги и цены</h2>
-        </div>
-
-        <!-- Cleaning Services -->
-        <div class="services-category">
-            <h3 class="services-category__title">
-                <span class="services-category__icon">🏠</span>
-                Уборка помещений
-            </h3>
-            <div class="price-cards-grid">
-                <div class="price-card price-card--basic">
-                    <div class="price-card__header">
-                        <h4 class="price-card__title">BASIC</h4>
-                        <p class="price-card__subtitle">Поддерживающая уборка</p>
-                    </div>
-                    <div class="price-card__body">
-                        <ul class="price-card__features">
-                            <li>Сухая и влажная уборка полов</li>
-                            <li>Протирка пыли с поверхностей</li>
-                            <li>Уборка санузла</li>
-                            <li>Вынос мусора</li>
-                        </ul>
-                    </div>
-                    <div class="price-card__footer">
-                        <a href="{% url 'calculator:calculator' %}" class="btn btn--outline btn--full">
-                            Рассчитать стоимость
-                        </a>
-                    </div>
-                </div>
-
-                <div class="price-card price-card--general price-card--featured">
-                    <div class="price-card__badge">Популярное</div>
-                    <div class="price-card__header">
-                        <h4 class="price-card__title">GENERAL</h4>
-                        <p class="price-card__subtitle">Генеральная уборка</p>
-                    </div>
-                    <div class="price-card__body">
-                        <ul class="price-card__features">
-                            <li>Всё из BASIC +</li>
-                            <li>Мытьё окон изнутри</li>
-                            <li>Чистка кухонной техники</li>
-                            <li>Мытьё дверей и плинтусов</li>
-                            <li>Уборка внутри шкафов</li>
-                        </ul>
-                    </div>
-                    <div class="price-card__footer">
-                        <a href="{% url 'calculator:calculator' %}" class="btn btn--primary btn--full">
-                            Рассчитать стоимость
-                        </a>
-                    </div>
-                </div>
-
-                <div class="price-card price-card--premium">
-                    <div class="price-card__header">
-                        <h4 class="price-card__title">GENERAL+</h4>
-                        <p class="price-card__subtitle">Премиум уборка</p>
-                    </div>
-                    <div class="price-card__body">
-                        <ul class="price-card__features">
-                            <li>Всё из GENERAL +</li>
-                            <li>Химчистка мягкой мебели</li>
-                            <li>Чистка ковров</li>
-                            <li>Мытьё люстр и светильников</li>
-                            <li>Глажка белья</li>
-                        </ul>
-                    </div>
-                    <div class="price-card__footer">
-                        <a href="{% url 'calculator:calculator' %}" class="btn btn--outline btn--full">
-                            Рассчитать стоимость
-                        </a>
-                    </div>
+                    <div class="stat-card__label">{% trans "гарантия" %}</div>
                 </div>
             </div>
         </div>
 
-        <!-- Dry Cleaning Services -->
-        <div class="services-category">
-            <h3 class="services-category__title">
-                <span class="services-category__icon">🛋️</span>
-                Химчистка мебели и ковров
-            </h3>
-            <div class="drycleaning-grid">
-                {% if drycleaning_services %}
-                {% for service in drycleaning_services %}
-                <div class="drycleaning-item">
-                    <span class="drycleaning-item__name">{{ service.name }}</span>
-                    <span class="drycleaning-item__price">
-                        от {{ service.price|floatformat:0 }}
-                        {% if service.unit == 'm2' %}₽/м²{% else %}₽{% endif %}
-                    </span>
-                </div>
-                {% endfor %}
-                {% else %}
-                <div class="drycleaning-item">
-                    <span class="drycleaning-item__name">Диван (2-местный)</span>
-                    <span class="drycleaning-item__price">от 2 500 ₽</span>
-                </div>
-                <div class="drycleaning-item">
-                    <span class="drycleaning-item__name">Диван (3-местный)</span>
-                    <span class="drycleaning-item__price">от 3 500 ₽</span>
-                </div>
-                <div class="drycleaning-item">
-                    <span class="drycleaning-item__name">Кресло</span>
-                    <span class="drycleaning-item__price">от 1 200 ₽</span>
-                </div>
-                <div class="drycleaning-item">
-                    <span class="drycleaning-item__name">Матрас (1-спальный)</span>
-                    <span class="drycleaning-item__price">от 1 500 ₽</span>
-                </div>
-                <div class="drycleaning-item">
-                    <span class="drycleaning-item__name">Матрас (2-спальный)</span>
-                    <span class="drycleaning-item__price">от 2 000 ₽</span>
-                </div>
-                <div class="drycleaning-item">
-                    <span class="drycleaning-item__name">Ковёр</span>
-                    <span class="drycleaning-item__price">от 300 ₽/м²</span>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="text-center mt-10">
-            <a href="{% url 'calculator:calculator' %}" class="btn btn--primary btn--xl">
-                Рассчитать точную стоимость
-                <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" />
-                </svg>
-            </a>
-        </div>
     </div>
 </section>
 
@@ -218,9 +71,10 @@
 <section class="gallery-section section" id="gallery">
     <div class="container">
         <div class="section__header">
-            <span class="section__label">Галерея</span>
-            <h2 class="section__title">Результаты нашей работы</h2>
-            <p class="section__subtitle">До и после — убедитесь в качестве сами</p>
+            <span class="section__label">{% trans "Галерея" %}</span>
+            <h2 class="section__title">{% trans "Результаты нашей работы" %}</h2>
+            <p class="section__subtitle">{% trans "До и после — убедитесь в качестве сами" %}</p>
+
         </div>
 
         <div class="gallery-grid">
@@ -228,14 +82,15 @@
             <div class="gallery-card">
                 <div class="gallery-card__compare">
                     <div class="gallery-card__before">
-                        <img src="{{ item.before_image }}" alt="До уборки" loading="lazy">
-                        <span class="gallery-card__label gallery-card__label--before">До</span>
+                        <img src="{{ item.before_image }}" alt="{% trans 'До уборки' %}" loading="lazy">
+                        <span class="gallery-card__label gallery-card__label--before">{% trans "До" %}</span>
                     </div>
                     <div class="gallery-card__after">
-                        <img src="{{ item.after_image }}" alt="После уборки" loading="lazy">
-                        <span class="gallery-card__label gallery-card__label--after">После</span>
+                        <img src="{{ item.after_image }}" alt="{% trans 'После уборки' %}" loading="lazy">
+                        <span class="gallery-card__label gallery-card__label--after">{% trans "После" %}</span>
                     </div>
                 </div>
+
                 {% if item.caption %}
                 <p class="gallery-card__caption">{{ item.caption }}</p>
                 {% endif %}
@@ -247,24 +102,6 @@
 {% endif %}
 
 <!-- CTA Section -->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-section__content">
-            <h2 class="cta-section__title">Готовы заказать уборку?</h2>
-            <p class="cta-section__text">Рассчитайте стоимость онлайн за 1 минуту</p>
-            <div class="cta-section__actions">
-                <a href="{% url 'calculator:calculator' %}" class="btn btn--white btn--xl">
-                    Рассчитать стоимость
-                </a>
-                {% if company_info and company_info.phone %}
-                <a href="tel:{{ company_info.phone }}" class="btn btn--outline-white btn--xl">
-                    📞 {{ company_info.phone }}
-                </a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</section>
 {% endblock %}
 
 {% block extra_css %}
