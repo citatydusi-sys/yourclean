@@ -1,0 +1,17 @@
+[33m9fcee73[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Initial commit without secrets
+[33m76cd4b5[m Remove secret JSON file and add to .gitignore
+[33maf69d39[m Initial com__mit123
+[33m1c3ff0b[m[33m ([m[1;31morigin/main[m[33m)[m Add Django management command create_admin for auto-creating superuser on Render
+[33m8e063e4[m Update settings.py
+[33mca1c7cd[m Update requirements.txt
+[33m473aef6[m Improve superuser creation script with database checks and better error handling
+[33mf21516e[m Add automatic superuser creation for Render free plan (no Shell access)
+[33mf74feae[m Merge branch 'main' of https://github.com/citatydusi-sys/yourclean
+[33m258f1d8[m Fix DEBUG setting for production - admin panel fix
+[33m366c9c9[m pass
+[33m5b593af[m Delete db.sqlite3
+[33mca5622e[m ви
+[33m1a1f05c[m Add admin access documentation and password reset script
+[33m90ded15[m Initial commit
+[33ma180f4d[m Add GitHub push instructions
+[33maa0d944[m Initial commit: Django project ready for Render deployment
