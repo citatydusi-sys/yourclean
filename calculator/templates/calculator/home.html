@@ -169,7 +169,7 @@
         <div class="cta-hero__content">
             <div class="cta-hero__badge">{% trans "Свободные окна на этой неделе" %}</div>
             <h2 class="cta-hero__title">{% trans "Готовы к чистоте?" %}</h2>
-            <p class="cta-hero__subtitle">{% trans "Рассчитайте стоимость онлайн и получите подтверждение в WhatsApp за пару минут." %}</p>
+            <p class="cta-hero__subtitle">{% trans "Рассчитайте стоимость онлайн, и мы сразу подтвердим заказ." %}</p>
             <div class="cta-hero__stats">
                 <div class="cta-hero__stat-card">
                     <span class="cta-hero__stat-number">4.9/5</span>
@@ -336,6 +336,13 @@
         text-align: center;
     }
 
+    @media (max-width: 640px) {
+        .service-card-eco {
+            max-width: 320px;
+            margin: 0 auto;
+        }
+    }
+
     .service-card-eco__image {
         aspect-ratio: 4/3;
         border-radius: var(--radius-xl);
@@ -443,6 +450,14 @@
         display: flex;
         flex-direction: column;
         gap: var(--space-3);
+    }
+
+    @media (max-width: 640px) {
+        .advantage-card,
+        .advantage-card__content {
+            align-items: center;
+            text-align: center;
+        }
     }
 
     .advantage-card__text {
@@ -591,9 +606,40 @@
         }
     }
 
+    /* Mobile: horizontal swipe carousel */
     @media (max-width: 640px) {
+        .reviews-section {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .reviews-section .container {
+            padding-left: var(--space-5);
+            padding-right: var(--space-5);
+        }
+
+        .reviews-carousel {
+            overflow-x: auto;
+            padding-bottom: var(--space-4);
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+
         .reviews-carousel__track {
-            grid-template-columns: 1fr;
+            display: flex;
+            gap: var(--space-4);
+        }
+
+        .review-card {
+            min-width: 260px;
+            max-width: 280px;
+            margin: 0 auto;
+            scroll-snap-align: center;
+            text-align: center;
+        }
+
+        .reviews-carousel::-webkit-scrollbar {
+            display: none;
         }
     }
 

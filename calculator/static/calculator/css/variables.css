@@ -171,16 +171,18 @@
     --header-height-scrolled: 64px;
 }
 
-/* Dark mode support */
+/* Override system dark mode – site stays bright */
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-bg: #0F0F0F;
-        --color-bg-alt: #1A1A1A;
-        --color-surface: #1F1F1F;
-        --color-text: #FAFAFA;
-        --color-text-secondary: #D4D4D4;
-        --color-text-muted: #8A8A8A;
-        --color-border: #2A2A2A;
-        --color-border-light: #1F1F1F;
+        color-scheme: light;
+        --color-bg: #FFFFFF;
+        --color-bg-alt: #F5F7FA;
+        --color-surface: #FFFFFF;
+        --color-card-bg: #F8F9FA;
+        --color-text: #1E293B;
+        --color-text-secondary: #475569;
+        --color-text-muted: #94A3B8;
+        --color-border: #E2E8F0;
+        --color-border-light: #F1F5F9;
     }
 }

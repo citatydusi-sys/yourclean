@@ -276,7 +276,7 @@
                                 </div>
                                 <div class="form__group">
                                     <label class="form__label form__label--required" for="phone">{% trans "Телефон" %}</label>
-                                    <input type="tel" id="phone" name="phone" class="form__input" placeholder="+7 ..."
+                                    <input type="tel" id="phone" name="phone" class="form__input" placeholder="+420 ___ ___ ___"
                                         required>
                                 </div>
                             </div>
@@ -307,8 +307,7 @@
                         </form>
                     </div>
                     <div class="calculator-footer calculator-footer--column">
-                        <button type="button" class="btn btn--whatsapp btn--xl btn--full" id="submit-whatsapp">
-                            
+                        <button type="button" class="btn btn--primary btn--xl btn--full" id="submit-order">
                             {% trans "Оформить заказ" %}
                         </button>
                         <button type="button" class="btn btn--outline btn--lg" id="step4-prev">
@@ -930,17 +929,6 @@
         .form__row {
             grid-template-columns: 1fr;
         }
-    }
-
-    /* WhatsApp Button */
-    .btn--whatsapp {
-        background: #25D366;
-        color: white;
-        border: none;
-    }
-
-    .btn--whatsapp:hover {
-        background: #20bd5a;
     }
 
     /* Order Success */

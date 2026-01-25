@@ -465,9 +465,19 @@ class Calculator {
         return '';
     }
 
+    ensureCzechPhonePrefix(phoneValue) {
+        const digits = (phoneValue || '').replace(/[^0-9]/g, '');
+        let national = digits;
+        if (national.startsWith('420')) {
+            national = national.slice(3);
+        }
+        const formatted = national ? `+420 ${national}` : '+420 ';
+        return formatted.trim();
+    }
+
     setSubmittingState(isSubmitting) {
         this.isSubmitting = isSubmitting;
-        const submitBtn = document.getElementById('submit-whatsapp');
+        const submitBtn = document.getElementById('submit-order');
         if (submitBtn) {
             submitBtn.disabled = isSubmitting;
             submitBtn.classList.toggle('btn--loading', isSubmitting);
@@ -475,7 +485,7 @@ class Calculator {
         }
     }
 
-    async submitToWhatsApp() {
+    async submitOrder() {
         if (this.isSubmitting) {
             return;
         }
@@ -495,74 +505,14 @@ class Calculator {
             return;
         }
 
-        // Build WhatsApp message
-        const levelNames = { basic: 'BASIC', general: 'GENERAL', general_plus: 'GENERAL+' };
-        const date = this.selectedDate ? new Date(this.selectedDate) : null;
+        const formattedPhone = this.ensureCzechPhonePrefix(phoneInput.value.trim());
+        phoneInput.value = formattedPhone;
 
-        let message = `🧹 ЗАЯВКА НА ${this.serviceType === 'cleaning' ? 'УБОРКУ' : 'ХИМЧИСТКУ'}\n\n`;
-        message += `👤 Имя: ${nameInput.value}\n`;
-        message += `📞 Телефон: ${phoneInput.value}\n`;
-
-        if (addressInput.value) {
-            message += `📍 Адрес: ${addressInput.value}\n`;
-        }
-
-        message += `\n📋 ПАРАМЕТРЫ:\n`;
-
-        if (date) {
-            message += `📅 Дата: ${date.getDate()} ${this.monthNames[date.getMonth()]} ${date.getFullYear()}\n`;
-        }
-
-        if (timeInput.value) {
-            message += `⏰ Время: ${timeInput.value}\n`;
-        }
-
-        if (this.serviceType === 'cleaning') {
-            message += `🔹 Тип: ${levelNames[this.level]}\n`;
-            message += `🔹 Площадь: ${this.area} м²\n`;
-        } else {
-            message += `🔹 Химчистка мебели\n`;
-        }
-
-        if (this.selectedDiscount > 0) {
-            message += `🎉 Скидка: ${this.selectedDiscount}%\n`;
-        }
-
-        message += `\n💰 ИТОГО: ${this.calculatedPrice} Kč`;
-
-        if (this.selectedDiscount > 0) {
-            message += ` (было ${this.originalPrice} Kč)`;
-        }
-
-        if (commentInput.value) {
-            message += `\n\n💬 Комментарий: ${commentInput.value}`;
-        }
-
-        // Get WhatsApp number
-        let whatsappNumber = window.WHATSAPP_NUMBER || '';
-        // Fallback to founder's number
-        if (!whatsappNumber) {
-            whatsappNumber = "77077801708";
-        }
-
-        const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
-
-        if (!cleanNumber) {
-            console.error('WhatsApp number missing even after fallback');
-            alert('Ошибка конфигурации WhatsApp');
-            return;
-        }
-
-        // Open WhatsApp immediately with local message (параллельно сохраняем заявку)
-        const fallbackEncodedMessage = encodeURIComponent(message);
-        const fallbackWhatsappUrl = `https://wa.me/${cleanNumber}?text=${fallbackEncodedMessage}`;
-        window.open(fallbackWhatsappUrl, '_blank');
-
-        // Try to save order to backend first
+        // Try to save order to backend (и далее в Google Sheets)
         try {
             const orderData = {
                 name: nameInput.value,
-                phone: phoneInput.value,
+                phone: formattedPhone,
                 address: addressInput.value || null,
                 level: this.serviceType === 'cleaning' ? this.level : 'basic',
                 area: this.serviceType === 'cleaning' ? this.area : 1,
@@ -677,9 +627,9 @@ class Calculator {
             this.updateSliderBackground(areaSlider);
         }
 
-        // WhatsApp submit
-        document.getElementById('submit-whatsapp')?.addEventListener('click', () => {
-            this.submitToWhatsApp();
+        // Order submit
+        document.getElementById('submit-order')?.addEventListener('click', () => {
+            this.submitOrder();
         });
     }
 

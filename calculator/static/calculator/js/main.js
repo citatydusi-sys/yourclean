@@ -28,7 +28,7 @@ function initHeaderScroll() {
     let ticking = false;
 
     const updateHeader = () => {
-        if (window.scrollY > 100) {
+        if (window.scrollY > 0) {
             header.classList.add('header--scrolled');
         } else {
             header.classList.remove('header--scrolled');
