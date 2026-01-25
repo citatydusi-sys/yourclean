@@ -550,6 +550,7 @@ class Calculator {
         // Show success
         document.querySelectorAll('.calculator-step').forEach(el => el.style.display = 'none');
         document.getElementById('order-success').style.display = 'block';
+        this.scrollToCalculatorTop();
         this.setSubmittingState(false);
     }
 

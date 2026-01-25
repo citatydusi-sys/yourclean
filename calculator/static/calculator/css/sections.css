@@ -785,6 +785,9 @@
     border-radius: var(--radius-full);
     font-size: 0.95rem;
     transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .header--scrolled .lang-chip {
@@ -794,6 +797,60 @@
 .lang-chip--active {
     background: rgba(15, 23, 42, 0.4);
     color: #fff;
+}
+
+.lang-chip__flag {
+    width: 18px;
+    height: 12px;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.lang-chip__flag--ru {
+    background: linear-gradient(180deg, #ffffff 0 33%, #0039a6 33% 66%, #d52b1e 66% 100%);
+}
+
+.lang-chip__flag--en {
+    background:
+        linear-gradient(180deg,
+            #b22234 0%, #b22234 10%,
+            #ffffff 10%, #ffffff 20%,
+            #b22234 20%, #b22234 30%,
+            #ffffff 30%, #ffffff 40%,
+            #b22234 40%, #b22234 50%,
+            #ffffff 50%, #ffffff 60%,
+            #b22234 60%, #b22234 70%,
+            #ffffff 70%, #ffffff 80%,
+            #b22234 80%, #b22234 90%,
+            #ffffff 90%, #ffffff 100%);
+}
+
+.lang-chip__flag--en::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 60%;
+    background: #3c3b6e;
+}
+
+.lang-chip__flag--cs {
+    background:
+        linear-gradient(180deg, #ffffff 0 50%, #d7141a 50% 100%);
+}
+
+.lang-chip__flag--cs::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background: #11457e;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
 .header--scrolled .lang-chip--active {

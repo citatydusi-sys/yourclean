@@ -60,15 +60,18 @@
                         {% get_current_language as current_lang %}
                         <button type="submit" name="language" value="ru"
                             class="lang-chip {% if current_lang|slice:':2' == 'ru' %}lang-chip--active{% endif %}">
-                            RU
+                            <span class="lang-chip__flag lang-chip__flag--ru" aria-hidden="true"></span>
+                            <span class="lang-chip__label">RU</span>
                         </button>
                         <button type="submit" name="language" value="en"
                             class="lang-chip {% if current_lang|slice:':2' == 'en' %}lang-chip--active{% endif %}">
-                            EN
+                            <span class="lang-chip__flag lang-chip__flag--en" aria-hidden="true"></span>
+                            <span class="lang-chip__label">EN</span>
                         </button>
                         <button type="submit" name="language" value="cs"
                             class="lang-chip {% if current_lang|slice:':2' == 'cs' %}lang-chip--active{% endif %}">
-                            CZ
+                            <span class="lang-chip__flag lang-chip__flag--cs" aria-hidden="true"></span>
+                            <span class="lang-chip__label">CZ</span>
                         </button>
                     </form>
                     {% if company_info and company_info.phone %}
@@ -198,14 +201,13 @@
                         <ul class="footer__links">
                             <li><a href="{% url 'calculator:calculator' %}#cleaning">{% trans "Квартиры и дома" %}</a>
                             </li>
-                            <li><a href="{% url 'calculator:calculator' %}#drycleaning">{% trans "Химчистка мебели"
-                                    %}</a></li>
+                            <li><a href="{% url 'calculator:calculator' %}#drycleaning">{% trans "Химчистка мебели" %}</a>
+                            </li>
                             <li><a href="{% url 'calculator:calculator' %}">{% trans "Уборка офисов" %}</a></li>
                         </ul>
                     </div>
                     <div>
                         <h3 class="footer__section-title">{% trans "Контакты" %}</h3>
-                        {% if company_info %}
                         <div class="footer__contact-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path
@@ -213,7 +215,7 @@
                             </svg>
                             <div>
                                 <span>{% trans "Телефон" %}</span>
-                                <a href="tel:{{ company_info.phone }}">{{ company_info.phone }}</a>
+                                <a href="tel:+420703953853">+420 703 953 853</a>
                             </div>
                         </div>
                         <div class="footer__contact-item">
@@ -223,10 +225,10 @@
                             </svg>
                             <div>
                                 <span>{% trans "Email" %}</span>
-                                <a href="mailto:{{ company_info.email }}">{{ company_info.email }}</a>
+                                <a href="mailto:yourclean.prague@gmail.com">yourclean.prague@gmail.com</a>
                             </div>
                         </div>
-                        {% if company_info.address %}
+                        {% if company_info and company_info.address %}
                         <div class="footer__contact-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 21c-4.418 0-8-5.373-8-9a8 8 0 0116 0c0 3.627-3.582 9-8 9z" />
@@ -238,7 +240,6 @@
                             </div>
                         </div>
                         {% endif %}
-                        {% endif %}
                     </div>
                     <div>
                         <h3 class="footer__section-title">{% trans "График" %}</h3>
@@ -246,14 +247,6 @@
                             <strong>{% trans "Ежедневно 08:00 — 22:00" %}</strong>
                             {% trans "Работаем без выходных" %}
                         </div>
-                        <h3 class="footer__section-title footer__section-title--secondary">{% trans "Обратная связь" %}
-                        </h3>
-                        <form class="footer__form" action="mailto:{{ company_info.email }}" method="post"
-                            enctype="text/plain">
-                            <input type="email" name="email" placeholder="{% trans 'Ваш email' %}" required>
-                            <button type="submit">{% trans "Отправить" %}</button>
-                        </form>
-                        <p class="footer__form-note">{% trans "Ответим в течение 15 минут." %}</p>
                     </div>
                 </div>
             </div>
