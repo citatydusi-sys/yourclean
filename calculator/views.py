@@ -337,7 +337,63 @@ def create_order_api(request):
         
         # Парсинг скидки
         applied_discount_percent = int(data.get('applied_discount_percent', 0))
-        
+
+        # Обработка дополнительных услуг
+        extra_services_ids = data.get('extra_services') or []
+        if not isinstance(extra_services_ids, list):
+            extra_services_ids = []
+
+        extra_services_text = None
+        if extra_services_ids:
+            services_qs = ExtraService.objects.filter(id__in=extra_services_ids)
+            services_map = {service.id: service for service in services_qs}
+            lines = []
+            for raw_id in extra_services_ids:
+                try:
+                    service_id = int(raw_id)
+                except (ValueError, TypeError):
+                    continue
+                service = services_map.get(service_id)
+                if not service:
+                    continue
+                price_display = f"{service.price} Kč" if service.price_type == 'fixed' else f"{service.price} Kč/м²"
+                lines.append(f"{service.name} — {price_display}")
+            if lines:
+                extra_services_text = "\n".join(lines)
+
+        # Обработка объектов химчистки
+        dry_cleaning_payload = data.get('dry_cleaning_items') or {}
+        if not isinstance(dry_cleaning_payload, dict):
+            dry_cleaning_payload = {}
+
+        dry_cleaning_text = None
+        if dry_cleaning_payload:
+            dry_ids = []
+            for raw_id in dry_cleaning_payload.keys():
+                try:
+                    dry_ids.append(int(raw_id))
+                except (ValueError, TypeError):
+                    continue
+
+            services_qs = DryCleaningService.objects.filter(id__in=dry_ids)
+            services_map = {service.id: service for service in services_qs}
+            lines = []
+            for raw_id, qty in dry_cleaning_payload.items():
+                try:
+                    service_id = int(raw_id)
+                    quantity = Decimal(str(qty))
+                except (ValueError, TypeError, InvalidOperation):
+                    continue
+                if quantity <= 0:
+                    continue
+                service = services_map.get(service_id)
+                if not service:
+                    continue
+                unit_label = 'м²' if service.unit == 'm2' else 'шт'
+                lines.append(f"{service.name} — {quantity} {unit_label}")
+            if lines:
+                dry_cleaning_text = "\n".join(lines)
+
         # Создание заявки
         order = Order.objects.create(
             name=data.get('name'),
@@ -353,6 +409,8 @@ def create_order_api(request):
             desired_time=desired_time,
             applied_discount_percent=applied_discount_percent,
             comment=data.get('comment') or None,
+            extra_services=extra_services_text,
+            dry_cleaning_items=dry_cleaning_text,
             status='new'
         )
         
@@ -365,12 +423,19 @@ def create_order_api(request):
             whatsapp_number = "77077801708" # Номер основателя по умолчанию
         google_forms_url = ""  # Можно добавить в CompanyInfo
         
-        # Отправка в Google Sheets
-        try:
-            from .google_sheets import append_to_google_sheet
-            append_to_google_sheet(order)
-        except Exception as e:
-            print(f"Failed to append to Google Sheet: {e}")
+        # Отправка в Google Sheets (асинхронно, чтобы не блокировать ответ)
+        def _append_to_sheet_async(order_id):
+            try:
+                from .models import Order as OrderModel
+                from .google_sheets import append_to_google_sheet
+                instance = OrderModel.objects.filter(id=order_id).first()
+                if instance:
+                    append_to_google_sheet(instance)
+            except Exception as async_exc:
+                print(f"Failed to append to Google Sheet async: {async_exc}")
+
+        import threading
+        threading.Thread(target=_append_to_sheet_async, args=(order.id,), daemon=True).start()
 
         return JsonResponse({
             "success": True,

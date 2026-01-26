@@ -259,6 +259,18 @@ class Order(models.Model):
     desired_date = models.DateField(blank=True, null=True, verbose_name="Желаемая дата")
     desired_time = models.TimeField(blank=True, null=True, verbose_name="Желаемое время")
     comment = models.TextField(blank=True, null=True, verbose_name="Комментарий")
+    extra_services = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Дополнительные услуги",
+        help_text="Перечень выбранных дополнительных услуг"
+    )
+    dry_cleaning_items = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Объекты химчистки",
+        help_text="Выбранные позиции химчистки с количеством"
+    )
     
     # Статус и даты
     status = models.CharField(

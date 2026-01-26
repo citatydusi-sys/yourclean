@@ -19,7 +19,23 @@
 </section>
 
 <!-- Calculator Section -->
-<section class="calculator-section" id="calculator">
+<section class="calculator-section" id="calculator"
+    data-discount-label="{% trans 'Скидка' %}"
+    data-selected-label="{% trans 'Выбрано' %}"
+    data-discount-on-date="{% trans 'Скидка __PERCENT__% на эту дату!' %}"
+    data-summary-date-label="{% trans 'Дата' %}"
+    data-summary-service-label="{% trans 'Тип услуги' %}"
+    data-summary-level-label="{% trans 'Уровень' %}"
+    data-summary-area-label="{% trans 'Площадь' %}"
+    data-summary-discount-label="{% trans 'Скидка' %}"
+    data-service-cleaning-name="{% trans 'Уборка' %}"
+    data-service-drycleaning-name="{% trans 'Химчистка' %}"
+    data-summary-extra-label="{% trans 'Дополнительные услуги' %}"
+    data-summary-extra-empty="{% trans 'Дополнительные услуги не выбраны' %}"
+    data-summary-dry-label="{% trans 'Объекты химчистки' %}"
+    data-summary-dry-empty="{% trans 'Химчистка не выбрана' %}"
+    data-area-unit="{% trans 'м²' %}"
+    data-unit-piece="{% trans 'шт' %}">
     <div class="container">
         <!-- Steps Indicator -->
         <div class="steps-indicator">
@@ -289,14 +305,10 @@
 
                             <div class="form__group">
                                 <label class="form__label" for="time">{% trans "Удобное время" %}</label>
-                                <select id="time" name="time" class="form__select">
-                                    <option value="">{% trans "Выберите время" %}</option>
-                                    <option value="08:00">08:00 — 10:00</option>
-                                    <option value="10:00">10:00 — 12:00</option>
-                                    <option value="12:00">12:00 — 14:00</option>
-                                    <option value="14:00">14:00 — 16:00</option>
-                                    <option value="16:00">16:00 — 18:00</option>
-                                </select>
+                                <div class="time-options">
+                                    <input type="text" id="time" name="time" class="form__input"
+                                        placeholder="{% trans 'Напишите удобное время (например, 09:30)' %}">
+                                </div>
                             </div>
 
                             <div class="form__group">
@@ -772,6 +784,47 @@
     .extra-service-item:hover {
         background: var(--color-surface);
         border-color: var(--color-primary-200);
+    }
+
+    /* Time selection */
+    .time-options {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .time-button-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+
+    .time-option-button {
+        flex: 1 1 140px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-3);
+        background: var(--color-bg-alt);
+        color: var(--color-text);
+        font-weight: var(--font-medium);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+    }
+
+    .time-option-button:hover {
+        border-color: var(--color-primary-300);
+        background: var(--color-surface);
+    }
+
+    .time-option-button.active {
+        background: var(--gradient-cta);
+        color: white;
+        border-color: transparent;
+    }
+
+    .time-options__note {
+        color: var(--color-text-muted);
+        font-size: var(--text-xs);
     }
 
     .extra-service-item.selected {

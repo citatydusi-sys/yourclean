@@ -21,6 +21,26 @@ class Calculator {
         this.currentMonth = new Date().getMonth();
         this.currentYear = new Date().getFullYear();
 
+        const calculatorSection = document.getElementById('calculator');
+        const data = calculatorSection?.dataset || {};
+        this.i18n = {
+            discountLabel: data.discountLabel || 'Скидка',
+            discountOnDate: data.discountOnDate || 'Скидка __PERCENT__% на эту дату!',
+            summaryDate: data.summaryDateLabel || 'Дата',
+            summaryService: data.summaryServiceLabel || 'Тип услуги',
+            summaryLevel: data.summaryLevelLabel || 'Уровень',
+            summaryArea: data.summaryAreaLabel || 'Площадь',
+            summaryDiscount: data.summaryDiscountLabel || 'Скидка',
+            serviceCleaningName: data.serviceCleaningName || 'Уборка',
+            serviceDrycleaningName: data.serviceDrycleaningName || 'Химчистка',
+            summaryExtra: data.summaryExtraLabel || 'Дополнительные услуги',
+            summaryExtraEmpty: data.summaryExtraEmpty || 'Дополнительные услуги не выбраны',
+            summaryDry: data.summaryDryLabel || 'Объекты химчистки',
+            summaryDryEmpty: data.summaryDryEmpty || 'Химчистка не выбрана',
+            areaUnit: data.areaUnit || 'м²',
+            unitPiece: data.unitPiece || 'шт'
+        };
+
         this.monthNames = this.getMonthNames();
 
         this.init();
@@ -158,7 +178,7 @@ class Calculator {
             dateDisplay.textContent = `📅 ${date.getDate()} ${this.monthNames[date.getMonth()]} ${date.getFullYear()}`;
 
             if (this.selectedDiscount > 0) {
-                discountDisplay.textContent = `🎉 Скидка ${this.selectedDiscount}% на эту дату!`;
+                discountDisplay.textContent = `🎉 ${this.i18n.discountOnDate.replace('__PERCENT__', this.selectedDiscount)}`;
                 discountDisplay.style.display = 'block';
             } else {
                 discountDisplay.style.display = 'none';
@@ -383,7 +403,7 @@ class Calculator {
             if (this.selectedDiscount > 0) {
                 oldPriceDisplay.textContent = `${Math.round(originalPrice)} Kč`;
                 oldPriceDisplay.style.display = 'block';
-                discountInfo.textContent = `Скидка ${this.selectedDiscount}%`;
+                discountInfo.textContent = `${this.i18n.discountLabel} ${this.selectedDiscount}%`;
                 discountInfo.style.display = 'block';
             } else if (data.old_price) {
                 oldPriceDisplay.textContent = `${Math.round(parseFloat(data.old_price))} Kč`;
@@ -414,36 +434,80 @@ class Calculator {
         if (this.selectedDate) {
             const date = new Date(this.selectedDate);
             html += `<div class="order-summary__item">
-                <span>📅 Дата</span>
+                <span>📅 ${this.i18n.summaryDate}</span>
                 <span>${date.getDate()} ${this.monthNames[date.getMonth()]}</span>
             </div>`;
         }
 
         // Service type
         html += `<div class="order-summary__item">
-            <span>🧹 Тип услуги</span>
-            <span>${this.serviceType === 'cleaning' ? 'Уборка' : 'Химчистка'}</span>
+            <span>🧹 ${this.i18n.summaryService}</span>
+            <span>${this.serviceType === 'cleaning' ? this.i18n.serviceCleaningName : this.i18n.serviceDrycleaningName}</span>
         </div>`;
 
         if (this.serviceType === 'cleaning') {
             // Level
             const levelNames = { basic: 'BASIC', general: 'GENERAL', general_plus: 'GENERAL+' };
             html += `<div class="order-summary__item">
-                <span>📋 Уровень</span>
+                <span>📋 ${this.i18n.summaryLevel}</span>
                 <span>${levelNames[this.level]}</span>
             </div>`;
 
             // Area
             html += `<div class="order-summary__item">
-                <span>📐 Площадь</span>
-                <span>${this.area} м²</span>
+                <span>📐 ${this.i18n.summaryArea}</span>
+                <span>${this.area} ${this.i18n.areaUnit}</span>
+            </div>`;
+        }
+
+        // Extra services (only for cleaning)
+        if (this.serviceType === 'cleaning') {
+            const selectedExtras = (this.extraServices || [])
+                .map(id => (this.extraServicesData || []).find(service => service.id === id))
+                .filter(Boolean);
+
+            const extrasContent = selectedExtras.length
+                ? `<ul class="order-summary__list">${selectedExtras.map(service => {
+                    const priceDisplay = service.price_type === 'fixed'
+                        ? `${service.price} Kč`
+                        : `${service.price} Kč/${this.i18n.areaUnit}`;
+                    return `<li>${service.name} — ${priceDisplay}</li>`;
+                }).join('')}</ul>`
+                : `<em>${this.i18n.summaryExtraEmpty}</em>`;
+
+            html += `<div class="order-summary__item order-summary__item--column">
+                <span>✨ ${this.i18n.summaryExtra}</span>
+                <div>${extrasContent}</div>
+            </div>`;
+        }
+
+        // Dry cleaning items
+        const dryItemsEntries = Object.entries(this.drycleaningItems || {})
+            .filter(([, qty]) => parseFloat(qty) > 0);
+        if (dryItemsEntries.length) {
+            const dryList = dryItemsEntries
+                .map(([id, qty]) => {
+                    const service = (this.drycleaningServicesData || []).find(item => String(item.id) === String(id));
+                    if (!service) return null;
+                    const unitLabel = service.unit === 'm2' ? this.i18n.areaUnit : this.i18n.unitPiece;
+                    return `<li>${service.name} — ${qty} ${unitLabel}</li>`;
+                })
+                .filter(Boolean);
+
+            const dryContent = dryList.length
+                ? `<ul class="order-summary__list">${dryList.join('')}</ul>`
+                : `<em>${this.i18n.summaryDryEmpty}</em>`;
+
+            html += `<div class="order-summary__item order-summary__item--column">
+                <span>🧼 ${this.i18n.summaryDry}</span>
+                <div>${dryContent}</div>
             </div>`;
         }
 
         // Discount
         if (this.selectedDiscount > 0) {
             html += `<div class="order-summary__item" style="color: var(--color-accent);">
-                <span>🎉 Скидка</span>
+                <span>🎉 ${this.i18n.summaryDiscount}</span>
                 <span>-${this.selectedDiscount}%</span>
             </div>`;
         }
@@ -523,7 +587,9 @@ class Calculator {
                 desired_time: timeInput.value || null,
                 applied_discount_percent: this.selectedDiscount,
                 comment: commentInput.value || null,
-                service_type: this.serviceType
+                service_type: this.serviceType,
+                extra_services: this.extraServices,
+                dry_cleaning_items: this.drycleaningItems
             };
 
             const response = await fetch('/api/orders/', {
@@ -631,6 +697,51 @@ class Calculator {
         // Order submit
         document.getElementById('submit-order')?.addEventListener('click', () => {
             this.submitOrder();
+        });
+
+        this.initTimeInputMask();
+    }
+
+    initTimeInputMask() {
+        const timeInput = document.getElementById('time');
+        if (!timeInput) return;
+
+        const formatValue = (raw) => {
+            const digits = raw.replace(/[^0-9]/g, '').slice(0, 4);
+            if (digits.length <= 2) {
+                return digits;
+            }
+            return `${digits.slice(0, 2)}:${digits.slice(2)}`;
+        };
+
+        timeInput.addEventListener('input', () => {
+            const caret = timeInput.selectionStart;
+            const beforeLength = timeInput.value.length;
+            timeInput.value = formatValue(timeInput.value);
+            const afterLength = timeInput.value.length;
+            const diff = afterLength - beforeLength;
+            timeInput.setSelectionRange(caret + diff, caret + diff);
+        });
+
+        timeInput.addEventListener('blur', () => {
+            let digits = timeInput.value.replace(/[^0-9]/g, '');
+            if (!digits) {
+                timeInput.value = '';
+                return;
+            }
+
+            while (digits.length < 4) {
+                digits += '0';
+            }
+
+            const hours = Math.min(parseInt(digits.slice(0, 2), 10) || 0, 23)
+                .toString()
+                .padStart(2, '0');
+            const minutes = Math.min(parseInt(digits.slice(2, 4), 10) || 0, 59)
+                .toString()
+                .padStart(2, '0');
+
+            timeInput.value = `${hours}:${minutes}`;
         });
     }
 

@@ -23,6 +23,8 @@ DEFAULT_HEADER = [
     "Желаемая дата",
     "Желаемое время",
     "Скидка (%)",
+    "Доп. услуги",
+    "Химчистка",
     "Статус",
 ]
 
@@ -93,12 +95,16 @@ def _build_row(order):
     def _format_date(value, fmt):
         return value.strftime(fmt) if value else ""
 
+    phone_value = order.phone or ""
+    if phone_value and not phone_value.startswith("'"):
+        phone_value = f"'{phone_value}"
+
     return [
         order.id,
         _format_date(order.created_at, "%Y-%m-%d"),
         _format_date(order.created_at, "%H:%M"),
         order.name,
-        order.phone,
+        phone_value,
         order.email or "",
         order.get_cleaning_level_display(),
         float(order.area) if order.area is not None else "",
@@ -110,5 +116,7 @@ def _build_row(order):
         _format_date(order.desired_date, "%Y-%m-%d"),
         _format_date(order.desired_time, "%H:%M"),
         order.applied_discount_percent,
+        order.extra_services or "",
+        order.dry_cleaning_items or "",
         order.get_status_display(),
     ]
