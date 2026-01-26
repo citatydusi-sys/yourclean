@@ -178,7 +178,7 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # External integrations
-GOOGLE_SHEETS_CREDENTIALS_PATH = r'C:\Users\Admin\Desktop\secrets\yourclean-sheets-fae04e2e6c68.json'
+GOOGLE_SHEETS_CREDENTIALS_PATH = os.path.join(settings.BASE_DIR, 'yourclean-sheets-fae04e2e6c68.json')
 GOOGLE_SHEETS_NAME = 'Заявки YourClean'
 
 # Default primary key field type
