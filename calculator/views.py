@@ -4,7 +4,8 @@ from decimal import Decimal, InvalidOperation
 import traceback
 from .models import (
     PricingSettings, PromoText, ExtraService, DryCleaningService, CleaningPrice,
-    Review, Advantage, GalleryItem, CompanyInfo, CleaningType
+    Review, Advantage, GalleryItem, CompanyInfo, CleaningType,
+    CargoTariff, CargoOption, ShoeCleaningService, ServiceCategory
 )
 from .services import (
     calculate_cleaning_price_by_level,
@@ -60,6 +61,9 @@ def calculator_view(request):
     reviews = Review.objects.filter(is_active=True).order_by('-date', '-created_at')[:3]
     promo_text = PromoText.get_active()
     
+    service_categories = ServiceCategory.objects.filter(is_active=True)
+    categories_dict = {cat.slug: cat for cat in service_categories}
+
     context = {
         'pricing': pricing,
         'company_info': company_info,
@@ -68,6 +72,7 @@ def calculator_view(request):
         'promo_text': promo_text,
         'max_rooms': 30,
         'max_bathrooms': 30,
+        'service_categories': categories_dict,
     }
     
     return render(request, 'calculator/calculator.html', context)
@@ -650,3 +655,27 @@ def format_order_for_external(order, data):
     ])
     
     return "\n".join(lines)
+
+
+def get_cargo_services_api(request):
+    """API endpoint для получения тарифов и опций грузоперевозок"""
+    tariffs = CargoTariff.objects.filter(is_active=True).values(
+        'id', 'name', 'price_per_hour', 'min_hours'
+    )
+    options = CargoOption.objects.filter(is_active=True).values(
+        'id', 'name', 'price'
+    )
+    return JsonResponse({
+        'tariffs': list(tariffs),
+        'options': list(options),
+    })
+
+
+def get_shoe_cleaning_api(request):
+    """API endpoint для получения услуг химчистки обуви"""
+    services = ShoeCleaningService.objects.filter(is_active=True).values(
+        'id', 'name', 'price_per_pair'
+    )
+    return JsonResponse({
+        'services': list(services),
+    })

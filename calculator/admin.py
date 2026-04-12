@@ -1,7 +1,9 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import (
     PricingSettings, CleaningType, ExtraService, DryCleaningService,
-    CleaningPrice, PromoText, Order, Review, Advantage, GalleryItem, CompanyInfo, DateDiscount
+    CleaningPrice, PromoText, Order, Review, Advantage, GalleryItem, CompanyInfo, DateDiscount,
+    CargoTariff, CargoOption, ShoeCleaningService, ServiceCategory
 )
 
 
@@ -206,3 +208,83 @@ class DateDiscountAdmin(admin.ModelAdmin):
             'description': 'Вы можете добавлять несколько скидок на разные даты. На одну дату можно установить только одну скидку.'
         }),
     )
+
+
+@admin.register(CargoTariff)
+class CargoTariffAdmin(admin.ModelAdmin):
+    """Админка для тарифов грузоперевозок"""
+    list_display = ('name', 'price_per_hour', 'min_hours', 'is_active', 'sort_order')
+    list_filter = ('is_active',)
+    search_fields = ('name',)
+    list_editable = ('price_per_hour', 'min_hours', 'is_active', 'sort_order')
+    fieldsets = (
+        ('Тариф', {
+            'fields': ('name', 'price_per_hour', 'min_hours', 'is_active', 'sort_order'),
+            'description': 'Добавьте тариф грузоперевозки. Например: «Машина + 1 грузчик» — 1100 Kč/час, мин. 1.5 ч.'
+        }),
+    )
+
+
+@admin.register(CargoOption)
+class CargoOptionAdmin(admin.ModelAdmin):
+    """Админка для доп. опций грузоперевозок"""
+    list_display = ('name', 'price', 'is_active', 'sort_order')
+    list_filter = ('is_active',)
+    search_fields = ('name',)
+    list_editable = ('price', 'is_active', 'sort_order')
+    fieldsets = (
+        ('Опция', {
+            'fields': ('name', 'price', 'is_active', 'sort_order'),
+            'description': 'Добавьте дополнительную опцию. Например: «Монтаж мебели» — 650 Kč.'
+        }),
+    )
+
+
+@admin.register(ShoeCleaningService)
+class ShoeCleaningServiceAdmin(admin.ModelAdmin):
+    """Админка для химчистки обуви"""
+    list_display = ('name', 'price_per_pair', 'is_active', 'sort_order')
+    list_filter = ('is_active',)
+    search_fields = ('name',)
+    list_editable = ('price_per_pair', 'is_active', 'sort_order')
+    fieldsets = (
+        ('Тип обуви', {
+            'fields': ('name', 'price_per_pair', 'is_active', 'sort_order'),
+            'description': 'Добавьте тип обуви и цену за пару. Например: «Кроссовки/Кеды» — 500 Kč.'
+        }),
+    )
+
+
+@admin.register(ServiceCategory)
+class ServiceCategoryAdmin(admin.ModelAdmin):
+    """Админка для категорий услуг (карточки на шаге 2)"""
+    list_display = ('slug', 'title', 'image_preview', 'is_active', 'sort_order')
+    list_editable = ('sort_order', 'is_active')
+    list_filter = ('is_active',)
+    fieldsets = (
+        ('Карточка услуги', {
+            'fields': ('slug', 'title', 'description', 'image', 'image_preview_large', 'is_active', 'sort_order'),
+            'description': 'Загрузите фото и настройте заголовок/описание для карточки услуги на шаге 2 калькулятора.'
+        }),
+    )
+    readonly_fields = ('image_preview_large',)
+
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="height:50px; border-radius:6px; object-fit:cover;" />', obj.image.url)
+        return "—"
+    image_preview.short_description = "Превью"
+
+    def image_preview_large(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="max-height:200px; border-radius:10px; object-fit:cover;" />', obj.image.url)
+        return "Фото не загружено"
+    image_preview_large.short_description = "Текущее фото"
+
+    def has_add_permission(self, request):
+        if self.model.objects.count() >= 4:
+            return False
+        return super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return False

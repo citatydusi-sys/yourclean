@@ -9,13 +9,24 @@ class Calculator {
         this.currentStep = 1;
         this.selectedDate = null;
         this.selectedDiscount = 0;
-        this.serviceType = 'cleaning'; // 'cleaning' or 'drycleaning'
+        this.serviceType = 'cleaning'; // 'cleaning', 'drycleaning', 'cargo', 'shoe_cleaning'
         this.level = 'basic';
         this.area = 50;
         this.extraServices = [];
         this.drycleaningItems = {};
         this.discounts = {};
         this.isSubmitting = false;
+
+        // Cargo state
+        this.cargoTariffId = null;
+        this.cargoHours = 2;
+        this.cargoOptions = [];
+        this.cargoTariffsData = [];
+        this.cargoOptionsData = [];
+
+        // Shoe cleaning state
+        this.shoeCleaningItems = {};
+        this.shoeCleaningData = [];
 
         // Calendar state
         this.currentMonth = new Date().getMonth();
@@ -33,10 +44,16 @@ class Calculator {
             summaryDiscount: data.summaryDiscountLabel || 'Скидка',
             serviceCleaningName: data.serviceCleaningName || 'Уборка',
             serviceDrycleaningName: data.serviceDrycleaningName || 'Химчистка',
+            serviceCargoName: data.serviceCargoName || 'Грузоперевозки',
+            serviceShoeName: data.serviceShoeName || 'Химчистка обуви',
             summaryExtra: data.summaryExtraLabel || 'Дополнительные услуги',
             summaryExtraEmpty: data.summaryExtraEmpty || 'Дополнительные услуги не выбраны',
             summaryDry: data.summaryDryLabel || 'Объекты химчистки',
             summaryDryEmpty: data.summaryDryEmpty || 'Химчистка не выбрана',
+            summaryTariff: data.summaryTariffLabel || 'Тариф',
+            summaryHours: data.summaryHoursLabel || 'Часы',
+            summaryCargoOptions: data.summaryCargoOptionsLabel || 'Доп. опции',
+            summaryShoeItems: data.summaryShoeItemsLabel || 'Обувь',
             areaUnit: data.areaUnit || 'м²',
             unitPiece: data.unitPiece || 'шт'
         };
@@ -66,7 +83,11 @@ class Calculator {
 
     async init() {
         await this.loadDiscounts();
-        await this.loadServices();
+        await Promise.all([
+            this.loadServices(),
+            this.loadCargoData(),
+            this.loadShoeCleaningData(),
+        ]);
 
         this.bindEvents();
         this.renderCalendar();
@@ -94,6 +115,30 @@ class Calculator {
             this.renderDrycleaningItems();
         } catch (error) {
             console.error('Error loading services:', error);
+        }
+    }
+
+    async loadCargoData() {
+        try {
+            const response = await fetch('/api/cargo/');
+            const data = await response.json();
+            this.cargoTariffsData = data.tariffs || [];
+            this.cargoOptionsData = data.options || [];
+            this.renderCargoTariffs();
+            this.renderCargoOptions();
+        } catch (error) {
+            console.error('Error loading cargo data:', error);
+        }
+    }
+
+    async loadShoeCleaningData() {
+        try {
+            const response = await fetch('/api/shoe-cleaning/');
+            const data = await response.json();
+            this.shoeCleaningData = data.services || [];
+            this.renderShoeCleaningItems();
+        } catch (error) {
+            console.error('Error loading shoe cleaning data:', error);
         }
     }
 
@@ -275,6 +320,99 @@ class Calculator {
             .map(item => parseInt(item.dataset.id, 10));
     }
 
+    renderCargoTariffs() {
+        const container = document.getElementById('cargo-tariffs');
+        if (!container || !this.cargoTariffsData.length) return;
+
+        container.innerHTML = this.cargoTariffsData.map((tariff, idx) => `
+            <label class="extra-service-item${idx === 0 ? ' selected' : ''}" data-id="${tariff.id}">
+                <span class="extra-service-item__checkbox">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                </span>
+                <div class="extra-service-item__info">
+                    <div class="extra-service-item__name">${tariff.name}</div>
+                    <div class="extra-service-item__price">${tariff.price_per_hour} Kč/час (мин. ${tariff.min_hours} ч.)</div>
+                </div>
+            </label>
+        `).join('');
+
+        if (this.cargoTariffsData.length > 0) {
+            this.cargoTariffId = this.cargoTariffsData[0].id;
+        }
+
+        container.querySelectorAll('.extra-service-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                container.querySelectorAll('.extra-service-item').forEach(i => i.classList.remove('selected'));
+                item.classList.add('selected');
+                this.cargoTariffId = parseInt(item.dataset.id, 10);
+                this.calculatePrice();
+            });
+        });
+    }
+
+    renderCargoOptions() {
+        const container = document.getElementById('cargo-options');
+        if (!container || !this.cargoOptionsData.length) return;
+
+        container.innerHTML = this.cargoOptionsData.map(option => `
+            <label class="extra-service-item" data-id="${option.id}">
+                <span class="extra-service-item__checkbox">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                </span>
+                <div class="extra-service-item__info">
+                    <div class="extra-service-item__name">${option.name}</div>
+                    <div class="extra-service-item__price">${option.price} Kč</div>
+                </div>
+            </label>
+        `).join('');
+
+        container.querySelectorAll('.extra-service-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                item.classList.toggle('selected');
+                this.cargoOptions = Array.from(container.querySelectorAll('.extra-service-item.selected'))
+                    .map(i => parseInt(i.dataset.id, 10));
+                this.calculatePrice();
+            });
+        });
+    }
+
+    renderShoeCleaningItems() {
+        const container = document.getElementById('shoe-cleaning-items');
+        if (!container || !this.shoeCleaningData.length) return;
+
+        container.innerHTML = this.shoeCleaningData.map(service => `
+            <div class="drycleaning-item-row" data-id="${service.id}">
+                <div class="drycleaning-item-row__info">
+                    <div class="drycleaning-item-row__name">${service.name}</div>
+                    <div class="drycleaning-item-row__price">${service.price_per_pair} Kč/пара</div>
+                </div>
+                <div class="drycleaning-item-row__quantity">
+                    <input type="number" min="0" value="0" data-id="${service.id}" class="form__input">
+                    <span>пар</span>
+                </div>
+            </div>
+        `).join('');
+
+        container.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                const id = input.dataset.id;
+                const value = parseInt(input.value) || 0;
+                if (value > 0) {
+                    this.shoeCleaningItems[id] = value;
+                } else {
+                    delete this.shoeCleaningItems[id];
+                }
+                this.calculatePrice();
+            });
+        });
+    }
+
     // ==================== Step Navigation ====================
 
     goToStep(step) {
@@ -295,13 +433,15 @@ class Calculator {
 
         // Update parameters visibility based on service type
         if (step === 3) {
-            const cleaningParams = document.getElementById('cleaning-params');
-            const drycleaningParams = document.getElementById('drycleaning-params');
-
-            if (cleaningParams && drycleaningParams) {
-                cleaningParams.style.display = this.serviceType === 'cleaning' ? 'block' : 'none';
-                drycleaningParams.style.display = this.serviceType === 'drycleaning' ? 'block' : 'none';
-            }
+            const panels = {
+                'cleaning': document.getElementById('cleaning-params'),
+                'drycleaning': document.getElementById('drycleaning-params'),
+                'cargo': document.getElementById('cargo-params'),
+                'shoe_cleaning': document.getElementById('shoe-cleaning-params'),
+            };
+            Object.entries(panels).forEach(([key, el]) => {
+                if (el) el.style.display = key === this.serviceType ? 'block' : 'none';
+            });
 
             this.calculatePrice();
         }
@@ -351,36 +491,62 @@ class Calculator {
         priceDisplay.innerHTML = '<span class="spinner"></span>';
 
         try {
-            let params;
+            let finalPrice = 0;
+            let apiOldPrice = null;
 
-            if (this.serviceType === 'cleaning') {
-                params = new URLSearchParams({
-                    level: this.level,
-                    area: this.area,
-                    rooms: 0,
-                    bathrooms: 0,
-                    extra_services: JSON.stringify(this.extraServices)
-                });
+            if (this.serviceType === 'cargo') {
+                // Local calculation for cargo
+                const tariff = this.cargoTariffsData.find(t => t.id === this.cargoTariffId);
+                if (tariff) {
+                    const minH = parseFloat(tariff.min_hours) || 1;
+                    const hours = Math.max(this.cargoHours, minH);
+                    finalPrice = parseFloat(tariff.price_per_hour) * hours;
+                }
+                for (const optId of this.cargoOptions) {
+                    const opt = this.cargoOptionsData.find(o => o.id === optId);
+                    if (opt) finalPrice += parseFloat(opt.price);
+                }
+            } else if (this.serviceType === 'shoe_cleaning') {
+                // Local calculation for shoe cleaning
+                for (const [id, qty] of Object.entries(this.shoeCleaningItems)) {
+                    const svc = this.shoeCleaningData.find(s => String(s.id) === String(id));
+                    if (svc && qty > 0) {
+                        finalPrice += parseFloat(svc.price_per_pair) * qty;
+                    }
+                }
             } else {
-                params = new URLSearchParams({
-                    level: 'basic',
-                    area: 0,
-                    rooms: 0,
-                    bathrooms: 0,
-                    dry_cleaning: JSON.stringify(this.drycleaningItems)
-                });
+                // API calculation for cleaning / drycleaning
+                let params;
+                if (this.serviceType === 'cleaning') {
+                    params = new URLSearchParams({
+                        level: this.level,
+                        area: this.area,
+                        rooms: 0,
+                        bathrooms: 0,
+                        extra_services: JSON.stringify(this.extraServices)
+                    });
+                } else {
+                    params = new URLSearchParams({
+                        level: 'basic',
+                        area: 0,
+                        rooms: 0,
+                        bathrooms: 0,
+                        dry_cleaning: JSON.stringify(this.drycleaningItems)
+                    });
+                }
+
+                const response = await fetch(`/api/price/?${params}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    priceDisplay.textContent = '—';
+                    console.error('Price calculation error:', data.error);
+                    return;
+                }
+                finalPrice = parseFloat(data.price);
+                if (data.old_price) apiOldPrice = parseFloat(data.old_price);
             }
 
-            const response = await fetch(`/api/price/?${params}`);
-            const data = await response.json();
-
-            if (data.error) {
-                priceDisplay.textContent = '—';
-                console.error('Price calculation error:', data.error);
-                return;
-            }
-
-            let finalPrice = parseFloat(data.price);
             let originalPrice = finalPrice;
 
             // Apply date discount
@@ -405,8 +571,8 @@ class Calculator {
                 oldPriceDisplay.style.display = 'block';
                 discountInfo.textContent = `${this.i18n.discountLabel} ${this.selectedDiscount}%`;
                 discountInfo.style.display = 'block';
-            } else if (data.old_price) {
-                oldPriceDisplay.textContent = `${Math.round(parseFloat(data.old_price))} Kč`;
+            } else if (apiOldPrice) {
+                oldPriceDisplay.textContent = `${Math.round(apiOldPrice)} Kč`;
                 oldPriceDisplay.style.display = 'block';
                 discountInfo.style.display = 'none';
             } else {
@@ -440,9 +606,15 @@ class Calculator {
         }
 
         // Service type
+        const serviceNames = {
+            cleaning: this.i18n.serviceCleaningName,
+            drycleaning: this.i18n.serviceDrycleaningName,
+            cargo: this.i18n.serviceCargoName,
+            shoe_cleaning: this.i18n.serviceShoeName,
+        };
         html += `<div class="order-summary__item">
             <span>🧹 ${this.i18n.summaryService}</span>
-            <span>${this.serviceType === 'cleaning' ? this.i18n.serviceCleaningName : this.i18n.serviceDrycleaningName}</span>
+            <span>${serviceNames[this.serviceType] || this.serviceType}</span>
         </div>`;
 
         if (this.serviceType === 'cleaning') {
@@ -458,10 +630,8 @@ class Calculator {
                 <span>📐 ${this.i18n.summaryArea}</span>
                 <span>${this.area} ${this.i18n.areaUnit}</span>
             </div>`;
-        }
 
-        // Extra services (only for cleaning)
-        if (this.serviceType === 'cleaning') {
+            // Extra services
             const selectedExtras = (this.extraServices || [])
                 .map(id => (this.extraServicesData || []).find(service => service.id === id))
                 .filter(Boolean);
@@ -482,26 +652,70 @@ class Calculator {
         }
 
         // Dry cleaning items
-        const dryItemsEntries = Object.entries(this.drycleaningItems || {})
-            .filter(([, qty]) => parseFloat(qty) > 0);
-        if (dryItemsEntries.length) {
-            const dryList = dryItemsEntries
-                .map(([id, qty]) => {
-                    const service = (this.drycleaningServicesData || []).find(item => String(item.id) === String(id));
-                    if (!service) return null;
-                    const unitLabel = service.unit === 'm2' ? this.i18n.areaUnit : this.i18n.unitPiece;
-                    return `<li>${service.name} — ${qty} ${unitLabel}</li>`;
-                })
-                .filter(Boolean);
+        if (this.serviceType === 'drycleaning') {
+            const dryItemsEntries = Object.entries(this.drycleaningItems || {})
+                .filter(([, qty]) => parseFloat(qty) > 0);
+            if (dryItemsEntries.length) {
+                const dryList = dryItemsEntries
+                    .map(([id, qty]) => {
+                        const service = (this.drycleaningServicesData || []).find(item => String(item.id) === String(id));
+                        if (!service) return null;
+                        const unitLabel = service.unit === 'm2' ? this.i18n.areaUnit : this.i18n.unitPiece;
+                        return `<li>${service.name} — ${qty} ${unitLabel}</li>`;
+                    })
+                    .filter(Boolean);
 
-            const dryContent = dryList.length
-                ? `<ul class="order-summary__list">${dryList.join('')}</ul>`
-                : `<em>${this.i18n.summaryDryEmpty}</em>`;
+                const dryContent = dryList.length
+                    ? `<ul class="order-summary__list">${dryList.join('')}</ul>`
+                    : `<em>${this.i18n.summaryDryEmpty}</em>`;
 
-            html += `<div class="order-summary__item order-summary__item--column">
-                <span>🧼 ${this.i18n.summaryDry}</span>
-                <div>${dryContent}</div>
-            </div>`;
+                html += `<div class="order-summary__item order-summary__item--column">
+                    <span>🧼 ${this.i18n.summaryDry}</span>
+                    <div>${dryContent}</div>
+                </div>`;
+            }
+        }
+
+        // Cargo summary
+        if (this.serviceType === 'cargo') {
+            const tariff = this.cargoTariffsData.find(t => t.id === this.cargoTariffId);
+            if (tariff) {
+                html += `<div class="order-summary__item">
+                    <span>🚚 ${this.i18n.summaryTariff}</span>
+                    <span>${tariff.name}</span>
+                </div>`;
+                html += `<div class="order-summary__item">
+                    <span>⏱ ${this.i18n.summaryHours}</span>
+                    <span>${this.cargoHours} ч.</span>
+                </div>`;
+            }
+            if (this.cargoOptions.length) {
+                const optList = this.cargoOptions
+                    .map(id => this.cargoOptionsData.find(o => o.id === id))
+                    .filter(Boolean)
+                    .map(o => `<li>${o.name} — ${o.price} Kč</li>`);
+                html += `<div class="order-summary__item order-summary__item--column">
+                    <span>📦 ${this.i18n.summaryCargoOptions}</span>
+                    <div><ul class="order-summary__list">${optList.join('')}</ul></div>
+                </div>`;
+            }
+        }
+
+        // Shoe cleaning summary
+        if (this.serviceType === 'shoe_cleaning') {
+            const shoeEntries = Object.entries(this.shoeCleaningItems || {}).filter(([, qty]) => qty > 0);
+            if (shoeEntries.length) {
+                const shoeList = shoeEntries
+                    .map(([id, qty]) => {
+                        const svc = this.shoeCleaningData.find(s => String(s.id) === String(id));
+                        return svc ? `<li>${svc.name} — ${qty} пар</li>` : null;
+                    })
+                    .filter(Boolean);
+                html += `<div class="order-summary__item order-summary__item--column">
+                    <span>👟 ${this.i18n.summaryShoeItems}</span>
+                    <div><ul class="order-summary__list">${shoeList.join('')}</ul></div>
+                </div>`;
+            }
         }
 
         // Discount
@@ -656,6 +870,15 @@ class Calculator {
                 this.serviceType = input.value;
             });
         });
+
+        // Cargo hours input
+        const cargoHoursInput = document.getElementById('cargo-hours');
+        if (cargoHoursInput) {
+            cargoHoursInput.addEventListener('input', () => {
+                this.cargoHours = parseFloat(cargoHoursInput.value) || 1;
+                this.debounceCalculate();
+            });
+        }
 
         // Level tabs
         document.querySelectorAll('#level-tabs .tab').forEach(tab => {

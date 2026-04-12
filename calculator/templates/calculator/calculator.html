@@ -35,7 +35,13 @@
     data-summary-dry-label="{% trans 'Объекты химчистки' %}"
     data-summary-dry-empty="{% trans 'Химчистка не выбрана' %}"
     data-area-unit="{% trans 'м²' %}"
-    data-unit-piece="{% trans 'шт' %}">
+    data-unit-piece="{% trans 'шт' %}"
+    data-service-cargo-name="{% trans 'Грузоперевозки' %}"
+    data-service-shoe-name="{% trans 'Химчистка обуви' %}"
+    data-summary-tariff-label="{% trans 'Тариф' %}"
+    data-summary-hours-label="{% trans 'Часы' %}"
+    data-summary-cargo-options-label="{% trans 'Доп. опции' %}"
+    data-summary-shoe-items-label="{% trans 'Обувь' %}">
     <div class="container">
         <!-- Steps Indicator -->
         <div class="steps-indicator">
@@ -118,28 +124,63 @@
                 <!-- Step 2: Service Type -->
                 <div class="calculator-step" id="step-2" data-step="2" style="display: none;">
                     <div class="calculator-header">
-                        <h2 class="calculator-header__title">{% trans "Выберите услугу" %}</h2>
+                        <h2 class="calculator-header__title">{% trans "Выбрать услугу" %}</h2>
                         <p class="calculator-header__subtitle">{% trans "Клининг или химчистка?" %}</p>
                     </div>
                     <div class="calculator-body">
-                        <div class="service-type-grid">
-                            <label class="service-type-card">
+                        <div class="service-type-grid service-type-grid--2x2">
+                            {% with cat=service_categories.cleaning %}
+                            <label class="service-type-card service-type-card--image">
                                 <input type="radio" name="service_type" value="cleaning" checked>
-                                <div class="service-type-card__content">
-                                    <div class="service-type-card__icon">🏠</div>
-                                    <div class="service-type-card__title">{% trans "Уборка" %}</div>
-                                    <div class="service-type-card__desc">{% trans "Генеральная и поддерживающая уборка помещений" %}
+                                <div class="service-type-card__content service-type-card__content--image"
+                                     style="background-image: url('{% if cat and cat.image %}{{ cat.image.url }}{% else %}https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80{% endif %}');">
+                                    <div class="service-type-card__overlay"></div>
+                                    <div class="service-type-card__text">
+                                        <div class="service-type-card__title">{% if cat %}{{ cat.title }}{% else %}{% trans "УБОРКА ПОМЕЩЕНИЙ" %}{% endif %}</div>
+                                        <div class="service-type-card__desc">{% if cat %}{{ cat.description }}{% else %}{% trans "Профессиональный клининг" %}{% endif %}</div>
                                     </div>
                                 </div>
                             </label>
-                            <label class="service-type-card">
+                            {% endwith %}
+                            {% with cat=service_categories.drycleaning %}
+                            <label class="service-type-card service-type-card--image">
                                 <input type="radio" name="service_type" value="drycleaning">
-                                <div class="service-type-card__content">
-                                    <div class="service-type-card__icon">🛋️</div>
-                                    <div class="service-type-card__title">{% trans "Химчистка" %}</div>
-                                    <div class="service-type-card__desc">{% trans "Химчистка мебели, ковров, матрасов" %}</div>
+                                <div class="service-type-card__content service-type-card__content--image"
+                                     style="background-image: url('{% if cat and cat.image %}{{ cat.image.url }}{% else %}https://images.unsplash.com/photo-1558317374-067fb5f30001?w=600&q=80{% endif %}');">
+                                    <div class="service-type-card__overlay"></div>
+                                    <div class="service-type-card__text">
+                                        <div class="service-type-card__title">{% if cat %}{{ cat.title }}{% else %}{% trans "ПРОФЕССИОНАЛЬНАЯ ХИМЧИСТКА" %}{% endif %}</div>
+                                        <div class="service-type-card__desc">{% if cat %}{{ cat.description }}{% else %}{% trans "Химчистка мебели, ковров, матрасов" %}{% endif %}</div>
+                                    </div>
                                 </div>
                             </label>
+                            {% endwith %}
+                            {% with cat=service_categories.cargo %}
+                            <label class="service-type-card service-type-card--image">
+                                <input type="radio" name="service_type" value="cargo">
+                                <div class="service-type-card__content service-type-card__content--image"
+                                     style="background-image: url('{% if cat and cat.image %}{{ cat.image.url }}{% else %}https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=600&q=80{% endif %}');">
+                                    <div class="service-type-card__overlay"></div>
+                                    <div class="service-type-card__text">
+                                        <div class="service-type-card__title">{% if cat %}{{ cat.title }}{% else %}{% trans "ГРУЗОПЕРЕВОЗКИ" %}{% endif %}</div>
+                                        <div class="service-type-card__desc">{% if cat %}{{ cat.description }}{% else %}{% trans "Машина с водителем и грузчиками" %}{% endif %}</div>
+                                    </div>
+                                </div>
+                            </label>
+                            {% endwith %}
+                            {% with cat=service_categories.shoe_cleaning %}
+                            <label class="service-type-card service-type-card--image">
+                                <input type="radio" name="service_type" value="shoe_cleaning">
+                                <div class="service-type-card__content service-type-card__content--image"
+                                     style="background-image: url('{% if cat and cat.image %}{{ cat.image.url }}{% else %}https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80{% endif %}');">
+                                    <div class="service-type-card__overlay"></div>
+                                    <div class="service-type-card__text">
+                                        <div class="service-type-card__title">{% if cat %}{{ cat.title }}{% else %}{% trans "ХИМЧИСТКА ОБУВИ" %}{% endif %}</div>
+                                        <div class="service-type-card__desc">{% if cat %}{{ cat.description }}{% else %}{% trans "Кроссовки, кожа, замша" %}{% endif %}</div>
+                                    </div>
+                                </div>
+                            </label>
+                            {% endwith %}
                         </div>
                     </div>
                     <div class="calculator-footer">
@@ -227,6 +268,36 @@
                             <div class="form__group">
                                 <label class="form__label">{% trans "Выберите объекты химчистки" %}</label>
                                 <div class="drycleaning-items" id="drycleaning-items">
+                                    <div class="skeleton" style="height: 48px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cargo Parameters -->
+                        <div id="cargo-params" style="display: none;">
+                            <div class="form__group">
+                                <label class="form__label">{% trans "Выберите тариф" %}</label>
+                                <div class="cargo-tariffs" id="cargo-tariffs">
+                                    <div class="skeleton" style="height: 48px;"></div>
+                                </div>
+                            </div>
+                            <div class="form__group">
+                                <label class="form__label" for="cargo-hours">{% trans "Количество часов" %}</label>
+                                <input type="number" id="cargo-hours" class="form__input" min="1" max="24" step="0.5" value="2" style="max-width:160px;">
+                            </div>
+                            <div class="form__group">
+                                <label class="form__label">{% trans "Дополнительные опции" %}</label>
+                                <div class="cargo-options" id="cargo-options">
+                                    <div class="skeleton" style="height: 48px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shoe Cleaning Parameters -->
+                        <div id="shoe-cleaning-params" style="display: none;">
+                            <div class="form__group">
+                                <label class="form__label">{% trans "Выберите тип обуви и количество пар" %}</label>
+                                <div class="shoe-cleaning-items" id="shoe-cleaning-items">
                                     <div class="skeleton" style="height: 48px;"></div>
                                 </div>
                             </div>
@@ -454,7 +525,7 @@
 
     /* Calculator Card */
     .calculator-wrapper {
-        max-width: 700px;
+        max-width: 800px;
         margin: 0 auto;
     }
 
@@ -678,63 +749,86 @@
         font-weight: var(--font-semibold);
     }
 
-    /* Service Type Cards */
-    .service-type-grid {
+    /* Service Type Cards — 2x2 Image Grid */
+    .service-type-grid--2x2 {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: var(--space-4);
     }
 
     @media (max-width: 480px) {
-        .service-type-grid {
+        .service-type-grid--2x2 {
             grid-template-columns: 1fr;
         }
     }
 
-    .service-type-card {
+    .service-type-card--image {
         cursor: pointer;
+        display: block;
     }
 
-    .service-type-card input {
+    .service-type-card--image input {
         position: absolute;
         opacity: 0;
         width: 0;
         height: 0;
     }
 
-    .service-type-card__content {
-        padding: var(--space-6);
-        background: var(--color-bg-alt);
-        border: 2px solid var(--color-border);
+    .service-type-card__content--image {
+        position: relative;
+        height: 200px;
         border-radius: var(--radius-xl);
-        text-align: center;
-        transition: all var(--transition-base);
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        border: 3px solid transparent;
+        transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+                    box-shadow 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+                    border-color 0.25s ease;
     }
 
-    .service-type-card input:checked+.service-type-card__content {
-        background: var(--color-primary-50);
+    .service-type-card--image:hover .service-type-card__content--image {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .service-type-card--image input:checked + .service-type-card__content--image {
         border-color: var(--color-primary);
+        transform: translateY(-3px);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
-    .service-type-card:hover .service-type-card__content {
-        border-color: var(--color-primary-200);
+    .service-type-card__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.05) 100%);
+        z-index: 1;
     }
 
-    .service-type-card__icon {
-        font-size: 48px;
-        margin-bottom: var(--space-4);
+    .service-type-card__text {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: var(--space-4) var(--space-5);
+        z-index: 2;
+        color: #fff;
     }
 
-    .service-type-card__title {
+    .service-type-card__text .service-type-card__title {
         font-family: var(--font-heading);
-        font-size: var(--text-xl);
-        font-weight: var(--font-semibold);
-        margin-bottom: var(--space-2);
+        font-size: var(--text-lg);
+        font-weight: var(--font-bold);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: var(--space-1);
+        text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
 
-    .service-type-card__desc {
-        font-size: var(--text-sm);
-        color: var(--color-text-muted);
+    .service-type-card__text .service-type-card__desc {
+        font-size: var(--text-xs);
+        color: rgba(255,255,255,0.85);
+        line-height: 1.4;
     }
 
     /* Area Input */

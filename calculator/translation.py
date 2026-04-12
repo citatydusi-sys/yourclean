@@ -8,6 +8,10 @@ from .models import (
     ExtraService,
     GalleryItem,
     PromoText,
+    CargoTariff,
+    CargoOption,
+    ShoeCleaningService,
+    ServiceCategory,
 )
 
 
@@ -44,3 +48,23 @@ class GalleryItemTranslationOptions(TranslationOptions):
 @register(PromoText)
 class PromoTextTranslationOptions(TranslationOptions):
     fields = ("text",)
+
+
+@register(CargoTariff)
+class CargoTariffTranslationOptions(TranslationOptions):
+    fields = ("name",)
+
+
+@register(CargoOption)
+class CargoOptionTranslationOptions(TranslationOptions):
+    fields = ("name",)
+
+
+@register(ShoeCleaningService)
+class ShoeCleaningServiceTranslationOptions(TranslationOptions):
+    fields = ("name",)
+
+
+@register(ServiceCategory)
+class ServiceCategoryTranslationOptions(TranslationOptions):
+    fields = ("title", "description")

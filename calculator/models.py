@@ -434,3 +434,108 @@ class DateDiscount(models.Model):
         if self.discount_percent > 0:
             return f"{self.date} — -{self.discount_percent}%"
         return f"{self.date} — без скидки"
+
+
+class ServiceCategory(models.Model):
+    """Категории услуг для шага 2 калькулятора (карточки с фото)"""
+    SERVICE_CHOICES = [
+        ('cleaning', 'Уборка помещений'),
+        ('drycleaning', 'Химчистка мебели'),
+        ('cargo', 'Грузоперевозки'),
+        ('shoe_cleaning', 'Химчистка обуви'),
+    ]
+
+    slug = models.CharField(
+        max_length=50,
+        choices=SERVICE_CHOICES,
+        unique=True,
+        verbose_name="Тип услуги"
+    )
+    title = models.CharField(max_length=200, verbose_name="Заголовок карточки")
+    description = models.CharField(max_length=500, verbose_name="Описание карточки")
+    image = models.ImageField(
+        upload_to='service_categories/',
+        blank=True,
+        null=True,
+        verbose_name="Фото карточки",
+        help_text="Рекомендуемый размер: 600×400 px"
+    )
+    sort_order = models.PositiveIntegerField(default=0, verbose_name="Порядок сортировки")
+    is_active = models.BooleanField(default=True, verbose_name="Активна")
+
+    class Meta:
+        verbose_name = "Категория услуги"
+        verbose_name_plural = "Категории услуг (карточки)"
+        ordering = ['sort_order']
+
+    def __str__(self):
+        return self.get_slug_display()
+
+
+class CargoTariff(models.Model):
+    """Тарифы грузоперевозок"""
+    name = models.CharField(max_length=200, verbose_name="Название тарифа")
+    price_per_hour = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name="Цена за час (крон)"
+    )
+    min_hours = models.DecimalField(
+        max_digits=4,
+        decimal_places=1,
+        default=1.0,
+        verbose_name="Минимальное количество часов"
+    )
+    is_active = models.BooleanField(default=True, verbose_name="Активен")
+    sort_order = models.PositiveIntegerField(default=0, verbose_name="Порядок сортировки")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Тариф грузоперевозки"
+        verbose_name_plural = "Грузоперевозки — Тарифы"
+        ordering = ['sort_order', 'name']
+
+    def __str__(self):
+        return f"{self.name} — {self.price_per_hour} Kč/час (мин. {self.min_hours} ч.)"
+
+
+class CargoOption(models.Model):
+    """Дополнительные опции грузоперевозок"""
+    name = models.CharField(max_length=200, verbose_name="Название опции")
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name="Фиксированная цена (крон)"
+    )
+    is_active = models.BooleanField(default=True, verbose_name="Активна")
+    sort_order = models.PositiveIntegerField(default=0, verbose_name="Порядок сортировки")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Доп. опция грузоперевозки"
+        verbose_name_plural = "Грузоперевозки — Доп. опции"
+        ordering = ['sort_order', 'name']
+
+    def __str__(self):
+        return f"{self.name} — {self.price} Kč"
+
+
+class ShoeCleaningService(models.Model):
+    """Химчистка обуви"""
+    name = models.CharField(max_length=200, verbose_name="Тип обуви")
+    price_per_pair = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name="Цена за пару (крон)"
+    )
+    is_active = models.BooleanField(default=True, verbose_name="Активна")
+    sort_order = models.PositiveIntegerField(default=0, verbose_name="Порядок сортировки")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Химчистка обуви"
+        verbose_name_plural = "Химчистка обуви"
+        ordering = ['sort_order', 'name']
+
+    def __str__(self):
+        return f"{self.name} — {self.price_per_pair} Kč/пара"

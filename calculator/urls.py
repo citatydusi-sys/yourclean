@@ -16,5 +16,7 @@ urlpatterns = [
     path('api/company/', views.get_company_info_api, name='company_info_api'),
     path('api/cleaning-services/', views.get_cleaning_services_api, name='cleaning_services_api'),
     path('api/calendar-discounts/', views.get_calendar_discounts_api, name='calendar_discounts_api'),
+    path('api/cargo/', views.get_cargo_services_api, name='cargo_api'),
+    path('api/shoe-cleaning/', views.get_shoe_cleaning_api, name='shoe_cleaning_api'),
 ]
 
