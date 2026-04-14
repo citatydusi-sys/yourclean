@@ -121,7 +121,7 @@ else:
 
 CONN_MAX_AGE = 60
 
-if 'default' in DATABASES:
+if 'default' in DATABASES and 'postgresql' in DATABASES['default'].get('ENGINE', ''):
     DATABASES['default'].setdefault('OPTIONS', {})
     DATABASES['default']['OPTIONS'].setdefault('connect_timeout', 5)
 
