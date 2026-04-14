@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from modeltranslation.admin import TranslationAdmin
 from .models import (
     PricingSettings, CleaningType, ExtraService, DryCleaningService,
     CleaningPrice, PromoText, Order, Review, Advantage, GalleryItem, CompanyInfo, DateDiscount,
@@ -211,7 +212,7 @@ class DateDiscountAdmin(admin.ModelAdmin):
 
 
 @admin.register(CargoTariff)
-class CargoTariffAdmin(admin.ModelAdmin):
+class CargoTariffAdmin(TranslationAdmin):
     """Админка для тарифов грузоперевозок"""
     list_display = ('name', 'price_per_hour', 'min_hours', 'is_active', 'sort_order')
     list_filter = ('is_active',)
@@ -226,7 +227,7 @@ class CargoTariffAdmin(admin.ModelAdmin):
 
 
 @admin.register(CargoOption)
-class CargoOptionAdmin(admin.ModelAdmin):
+class CargoOptionAdmin(TranslationAdmin):
     """Админка для доп. опций грузоперевозок"""
     list_display = ('name', 'price', 'is_active', 'sort_order')
     list_filter = ('is_active',)
@@ -241,7 +242,7 @@ class CargoOptionAdmin(admin.ModelAdmin):
 
 
 @admin.register(ShoeCleaningService)
-class ShoeCleaningServiceAdmin(admin.ModelAdmin):
+class ShoeCleaningServiceAdmin(TranslationAdmin):
     """Админка для химчистки обуви"""
     list_display = ('name', 'price_per_pair', 'is_active', 'sort_order')
     list_filter = ('is_active',)
@@ -256,7 +257,7 @@ class ShoeCleaningServiceAdmin(admin.ModelAdmin):
 
 
 @admin.register(ServiceCategory)
-class ServiceCategoryAdmin(admin.ModelAdmin):
+class ServiceCategoryAdmin(TranslationAdmin):
     """Админка для категорий услуг (карточки на шаге 2)"""
     list_display = ('slug', 'title', 'image_preview', 'is_active', 'sort_order')
     list_editable = ('sort_order', 'is_active')
