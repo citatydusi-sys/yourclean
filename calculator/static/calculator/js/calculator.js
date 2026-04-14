@@ -55,7 +55,16 @@ class Calculator {
             summaryCargoOptions: data.summaryCargoOptionsLabel || 'Доп. опции',
             summaryShoeItems: data.summaryShoeItemsLabel || 'Обувь',
             areaUnit: data.areaUnit || 'м²',
-            unitPiece: data.unitPiece || 'шт'
+            unitPiece: data.unitPiece || 'шт',
+            currency: data.currency || 'Kč',
+            unitPair: data.unitPair || 'пара',
+            unitPairs: data.unitPairs || 'пар',
+            unitHour: data.unitHour || 'час',
+            unitHours: data.unitHours || 'ч.',
+            unitMin: data.unitMin || 'мин.',
+            perHour: data.perHour || 'Kč/час',
+            perPair: data.perPair || 'Kč/пара',
+            perM2: data.perM2 || 'Kč/м²'
         };
 
         this.monthNames = this.getMonthNames();
@@ -261,8 +270,8 @@ class Calculator {
                     <div class="extra-service-item__name">${service.name}</div>
                     <div class="extra-service-item__price">
                         ${service.price_type === 'fixed'
-                ? `${service.price} Kč`
-                : `${service.price} Kč/м²`}
+                ? `${service.price} ${this.i18n.currency}`
+                : `${service.price} ${this.i18n.perM2}`}
                     </div>
                 </div>
             </label>
@@ -287,13 +296,13 @@ class Calculator {
                 <div class="drycleaning-item-row__info">
                     <div class="drycleaning-item-row__name">${service.name}</div>
                     <div class="drycleaning-item-row__price">
-                        ${service.unit === 'm2' ? `${service.price} Kč/м²` : `${service.price} Kč`}
+                        ${service.unit === 'm2' ? `${service.price} ${this.i18n.perM2}` : `${service.price} ${this.i18n.currency}`}
                     </div>
                 </div>
                 <div class="drycleaning-item-row__quantity">
                     <input type="number" min="0" value="0" data-id="${service.id}" 
                            data-unit="${service.unit}" class="form__input">
-                    <span>${service.unit === 'm2' ? 'м²' : 'шт'}</span>
+                    <span>${service.unit === 'm2' ? this.i18n.areaUnit : this.i18n.unitPiece}</span>
                 </div>
             </div>
         `).join('');
@@ -333,7 +342,7 @@ class Calculator {
                 </span>
                 <div class="extra-service-item__info">
                     <div class="extra-service-item__name">${tariff.name}</div>
-                    <div class="extra-service-item__price">${tariff.price_per_hour} Kč/час (мин. ${tariff.min_hours} ч.)</div>
+                    <div class="extra-service-item__price">${tariff.price_per_hour} ${this.i18n.perHour} (${this.i18n.unitMin} ${tariff.min_hours} ${this.i18n.unitHours})</div>
                 </div>
             </label>
         `).join('');
@@ -366,7 +375,7 @@ class Calculator {
                 </span>
                 <div class="extra-service-item__info">
                     <div class="extra-service-item__name">${option.name}</div>
-                    <div class="extra-service-item__price">${option.price} Kč</div>
+                    <div class="extra-service-item__price">${option.price} ${this.i18n.currency}</div>
                 </div>
             </label>
         `).join('');
@@ -390,11 +399,11 @@ class Calculator {
             <div class="drycleaning-item-row" data-id="${service.id}">
                 <div class="drycleaning-item-row__info">
                     <div class="drycleaning-item-row__name">${service.name}</div>
-                    <div class="drycleaning-item-row__price">${service.price_per_pair} Kč/пара</div>
+                    <div class="drycleaning-item-row__price">${service.price_per_pair} ${this.i18n.perPair}</div>
                 </div>
                 <div class="drycleaning-item-row__quantity">
                     <input type="number" min="0" value="0" data-id="${service.id}" class="form__input">
-                    <span>пар</span>
+                    <span>${this.i18n.unitPairs}</span>
                 </div>
             </div>
         `).join('');
@@ -559,7 +568,7 @@ class Calculator {
                 maximumFractionDigits: 0
             }).format(Math.round(finalPrice));
 
-            priceDisplay.textContent = `${formattedPrice} Kč`;
+            priceDisplay.textContent = `${formattedPrice} ${this.i18n.currency}`;
 
             // Store for order
             this.calculatedPrice = Math.round(finalPrice);
@@ -567,12 +576,12 @@ class Calculator {
 
             // Show old price if discount
             if (this.selectedDiscount > 0) {
-                oldPriceDisplay.textContent = `${Math.round(originalPrice)} Kč`;
+                oldPriceDisplay.textContent = `${Math.round(originalPrice)} ${this.i18n.currency}`;
                 oldPriceDisplay.style.display = 'block';
                 discountInfo.textContent = `${this.i18n.discountLabel} ${this.selectedDiscount}%`;
                 discountInfo.style.display = 'block';
             } else if (apiOldPrice) {
-                oldPriceDisplay.textContent = `${Math.round(apiOldPrice)} Kč`;
+                oldPriceDisplay.textContent = `${Math.round(apiOldPrice)} ${this.i18n.currency}`;
                 oldPriceDisplay.style.display = 'block';
                 discountInfo.style.display = 'none';
             } else {
@@ -639,8 +648,8 @@ class Calculator {
             const extrasContent = selectedExtras.length
                 ? `<ul class="order-summary__list">${selectedExtras.map(service => {
                     const priceDisplay = service.price_type === 'fixed'
-                        ? `${service.price} Kč`
-                        : `${service.price} Kč/${this.i18n.areaUnit}`;
+                        ? `${service.price} ${this.i18n.currency}`
+                        : `${service.price} ${this.i18n.perM2}`;
                     return `<li>${service.name} — ${priceDisplay}</li>`;
                 }).join('')}</ul>`
                 : `<em>${this.i18n.summaryExtraEmpty}</em>`;
@@ -686,14 +695,14 @@ class Calculator {
                 </div>`;
                 html += `<div class="order-summary__item">
                     <span>⏱ ${this.i18n.summaryHours}</span>
-                    <span>${this.cargoHours} ч.</span>
+                    <span>${this.cargoHours} ${this.i18n.unitHours}</span>
                 </div>`;
             }
             if (this.cargoOptions.length) {
                 const optList = this.cargoOptions
                     .map(id => this.cargoOptionsData.find(o => o.id === id))
                     .filter(Boolean)
-                    .map(o => `<li>${o.name} — ${o.price} Kč</li>`);
+                    .map(o => `<li>${o.name} — ${o.price} ${this.i18n.currency}</li>`);
                 html += `<div class="order-summary__item order-summary__item--column">
                     <span>📦 ${this.i18n.summaryCargoOptions}</span>
                     <div><ul class="order-summary__list">${optList.join('')}</ul></div>
@@ -708,7 +717,7 @@ class Calculator {
                 const shoeList = shoeEntries
                     .map(([id, qty]) => {
                         const svc = this.shoeCleaningData.find(s => String(s.id) === String(id));
-                        return svc ? `<li>${svc.name} — ${qty} пар</li>` : null;
+                        return svc ? `<li>${svc.name} — ${qty} ${this.i18n.unitPairs}</li>` : null;
                     })
                     .filter(Boolean);
                 html += `<div class="order-summary__item order-summary__item--column">
@@ -727,7 +736,7 @@ class Calculator {
         }
 
         itemsEl.innerHTML = html;
-        totalEl.textContent = `${this.calculatedPrice || 0} Kč`;
+        totalEl.textContent = `${this.calculatedPrice || 0} ${this.i18n.currency}`;
     }
 
     getCsrfToken() {

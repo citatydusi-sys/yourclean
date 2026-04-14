@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-27 02:55+0500\n"
+"POT-Creation-Date: 2026-04-14 20:25+0500\n"
 "PO-Revision-Date: 2026-01-24 16:30+0500\n"
 "Last-Translator: YourClean Team <support@yourclean.cz>\n"
 "Language-Team: Czech <support@yourclean.cz>\n"
@@ -18,103 +18,103 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n % "
 "1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
-#: .\calculator\templates\base.html:48 .\calculator\templates\base.html:110
-#: .\calculator\templates\base.html:194
+#: .\calculator\templates\base.html:62 .\calculator\templates\base.html:124
+#: .\calculator\templates\base.html:208
 msgid "Главная"
 msgstr "Domů"
 
-#: .\calculator\templates\base.html:50 .\calculator\templates\base.html:111
-#: .\calculator\templates\base.html:195
+#: .\calculator\templates\base.html:64 .\calculator\templates\base.html:125
+#: .\calculator\templates\base.html:209
 #: .\calculator\templates\calculator\about.html:12
 msgid "О нас"
 msgstr "O nás"
 
-#: .\calculator\templates\base.html:52
+#: .\calculator\templates\base.html:66
 msgid "Рассчитать"
 msgstr "Spočítat"
 
-#: .\calculator\templates\base.html:87
+#: .\calculator\templates\base.html:101
 msgid "Открыть меню"
 msgstr "Otevřít menu"
 
-#: .\calculator\templates\base.html:102
+#: .\calculator\templates\base.html:116
 msgid "Меню"
 msgstr "Menu"
 
-#: .\calculator\templates\base.html:103
+#: .\calculator\templates\base.html:117
 msgid "Закрыть меню"
 msgstr "Zavřít menu"
 
-#: .\calculator\templates\base.html:113 .\calculator\templates\base.html:196
+#: .\calculator\templates\base.html:127 .\calculator\templates\base.html:210
 #: .\calculator\templates\calculator\calculator.html:13
 #: .\calculator\templates\calculator\home.html:184
 msgid "Рассчитать стоимость"
 msgstr "Spočítat cenu"
 
-#: .\calculator\templates\base.html:132
+#: .\calculator\templates\base.html:146
 msgid "WhatsApp"
 msgstr "WhatsApp"
 
-#: .\calculator\templates\base.html:155
+#: .\calculator\templates\base.html:169
 msgid ""
 "Профессиональная уборка квартир, домов и офисов. Химчистка мебели и ковров."
 msgstr "Profesionální úklid bytů, domů a kanceláří. Čištění nábytku a koberců"
 
-#: .\calculator\templates\base.html:192
+#: .\calculator\templates\base.html:206
 msgid "Навигация"
 msgstr "Navigace"
 
-#: .\calculator\templates\base.html:200
+#: .\calculator\templates\base.html:214
 msgid "Услуги"
 msgstr "Služby"
 
-#: .\calculator\templates\base.html:202
+#: .\calculator\templates\base.html:216
 msgid "Квартиры и дома"
 msgstr "Byty a domy"
 
-#: .\calculator\templates\base.html:204
+#: .\calculator\templates\base.html:218
 msgid "Химчистка мебели"
 msgstr "Čištění nábytku"
 
-#: .\calculator\templates\base.html:206
+#: .\calculator\templates\base.html:220
 msgid "Уборка офисов"
 msgstr "Úklid kanceláří"
 
-#: .\calculator\templates\base.html:210
+#: .\calculator\templates\base.html:224
 msgid "Контакты"
 msgstr "Kontakty"
 
-#: .\calculator\templates\base.html:217
-#: .\calculator\templates\calculator\calculator.html:294
+#: .\calculator\templates\base.html:231
+#: .\calculator\templates\calculator\calculator.html:374
 msgid "Телефон"
 msgstr "Telefon"
 
-#: .\calculator\templates\base.html:227
+#: .\calculator\templates\base.html:241
 msgid "Email"
 msgstr "E-mail"
 
-#: .\calculator\templates\base.html:238
-#: .\calculator\templates\calculator\calculator.html:301
+#: .\calculator\templates\base.html:252
+#: .\calculator\templates\calculator\calculator.html:381
 msgid "Адрес"
 msgstr "Adresa"
 
-#: .\calculator\templates\base.html:245
+#: .\calculator\templates\base.html:259
 msgid "График"
 msgstr "Pracovní doba"
 
-#: .\calculator\templates\base.html:247
+#: .\calculator\templates\base.html:261
 msgid "Ежедневно 08:00 — 22:00"
 msgstr "Denně 08:00 — 22:00"
 
-#: .\calculator\templates\base.html:248
+#: .\calculator\templates\base.html:262
 msgid "Работаем без выходных"
 msgstr "Pracujeme bez volna"
 
-#: .\calculator\templates\base.html:255
+#: .\calculator\templates\base.html:269
 msgid "Все права защищены."
 msgstr "Všechna práva vyhrazena."
 
-#: .\calculator\templates\base.html:272
+#: .\calculator\templates\base.html:286
 msgid "Позвонить"
 msgstr "Zavolat"
 
@@ -241,17 +241,24 @@ msgstr "Vyberte datum, typ služby a parametry – okamžitě zjistíte přesnou
 
 #: .\calculator\templates\calculator\calculator.html:23
 #: .\calculator\templates\calculator\calculator.html:30
-#: .\calculator\templates\calculator\calculator.html:94
+#: .\calculator\templates\calculator\calculator.html:109
 msgid "Скидка"
 msgstr "Sleva"
 
-#: .\calculator\templates\calculator\calculator.html:37
-#: .\calculator\templates\calculator\calculator.html:204
-msgid "м²"
-msgstr "m²"
+#: .\calculator\templates\calculator\calculator.html:24
+#: .\calculator\templates\calculator\calculator.html:113
+#, fuzzy
+#| msgid "м² убрано"
+msgid "Выбрано"
+msgstr "m² uklizeno"
+
+#: .\calculator\templates\calculator\calculator.html:25
+#, python-format
+msgid "Скидка __PERCENT__%% на эту дату!"
+msgstr ""
 
 #: .\calculator\templates\calculator\calculator.html:26
-#: .\calculator\templates\calculator\calculator.html:44
+#: .\calculator\templates\calculator\calculator.html:59
 msgid "Дата"
 msgstr "Datum"
 
@@ -267,272 +274,404 @@ msgstr "Úroveň"
 msgid "Площадь"
 msgstr "Plocha"
 
+#: .\calculator\templates\calculator\calculator.html:31
+#, fuzzy
+#| msgid "Тип уборки"
+msgid "Уборка"
+msgstr "Typ úklidu"
+
+#: .\calculator\templates\calculator\calculator.html:32
+#, fuzzy
+#| msgid "Химчистка мебели"
+msgid "Химчистка"
+msgstr "Čištění nábytku"
+
 #: .\calculator\templates\calculator\calculator.html:33
-#: .\calculator\templates\calculator\calculator.html:218
+#: .\calculator\templates\calculator\calculator.html:268
 msgid "Дополнительные услуги"
 msgstr "Doplňkové služby"
 
-#: .\calculator\templates\calculator\calculator.html:24
+#: .\calculator\templates\calculator\calculator.html:34
 msgid "Дополнительные услуги не выбраны"
 msgstr "Doplňkové služby nejsou vybrány"
 
-#: .\calculator\templates\calculator\calculator.html:25
+#: .\calculator\templates\calculator\calculator.html:35
 msgid "Объекты химчистки"
 msgstr "Položky chemického čištění"
 
-#: .\calculator\templates\calculator\calculator.html:26
+#: .\calculator\templates\calculator\calculator.html:36
 msgid "Химчистка не выбрана"
 msgstr "Chemické čištění není vybráno"
 
-#: .\calculator\templates\calculator\calculator.html:52
-#: .\calculator\templates\calculator\calculator.html:166
-msgid "Параметры"
-msgstr "Parametry"
-
-#: .\calculator\templates\calculator\calculator.html:67
-msgid "Некоторые даты имеют специальные скидки"
-msgstr "Některá data mají speciální slevy"
-
-#: .\calculator\templates\calculator\calculator.html:36
-#: .\calculator\templates\calculator\calculator.html:204
+#: .\calculator\templates\calculator\calculator.html:37
+#: .\calculator\templates\calculator\calculator.html:254
 msgid "м²"
 msgstr "m²"
 
-#: .\calculator\templates\calculator\calculator.html:37
+#: .\calculator\templates\calculator\calculator.html:38
 msgid "шт"
 msgstr "ks"
 
-#: .\calculator\templates\calculator\calculator.html:35
+#: .\calculator\templates\calculator\calculator.html:39
+msgid "Грузоперевозки"
+msgstr "Stěhování"
+
+#: .\calculator\templates\calculator\calculator.html:40
+msgid "Химчистка обуви"
+msgstr "Čištění obuvi"
+
+#: .\calculator\templates\calculator\calculator.html:41
+msgid "Тариф"
+msgstr "Tarif"
+
+#: .\calculator\templates\calculator\calculator.html:42
+msgid "Часы"
+msgstr "Hodiny"
+
+#: .\calculator\templates\calculator\calculator.html:43
+msgid "Доп. опции"
+msgstr "Doplňkové možnosti"
+
+#: .\calculator\templates\calculator\calculator.html:44
+msgid "Обувь"
+msgstr "Obuv"
+
+#: .\calculator\templates\calculator\calculator.html:46
+msgid "пара"
+msgstr "pár"
+
+#: .\calculator\templates\calculator\calculator.html:47
+msgid "пар"
+msgstr "párů"
+
+#: .\calculator\templates\calculator\calculator.html:48
+msgid "час"
+msgstr "hod."
+
+#: .\calculator\templates\calculator\calculator.html:49
+msgid "ч."
+msgstr "hod."
+
+#: .\calculator\templates\calculator\calculator.html:50
+msgid "мин."
+msgstr "min."
+
+#: .\calculator\templates\calculator\calculator.html:51
+msgid "Kč/час"
+msgstr "Kč/hod."
+
+#: .\calculator\templates\calculator\calculator.html:52
+msgid "Kč/пара"
+msgstr "Kč/pár"
+
+#: .\calculator\templates\calculator\calculator.html:53
+msgid "Kč/м²"
+msgstr "Kč/m²"
+
+#: .\calculator\templates\calculator\calculator.html:63
 msgid "Услуга"
 msgstr "Služba"
 
+#: .\calculator\templates\calculator\calculator.html:67
+#: .\calculator\templates\calculator\calculator.html:216
+msgid "Параметры"
+msgstr "Parametry"
+
 #: .\calculator\templates\calculator\calculator.html:71
+#, fuzzy
+#| msgid "Ваш заказ"
+msgid "Заказ"
+msgstr "Vaše objednávka"
+
+#: .\calculator\templates\calculator\calculator.html:81
+#, fuzzy
+#| msgid "Выберите услугу"
+msgid "Выберите дату"
+msgstr "Vyberte službu"
+
+#: .\calculator\templates\calculator\calculator.html:82
+msgid "Некоторые даты имеют специальные скидки"
+msgstr "Některá data mají speciální slevy"
+
+#: .\calculator\templates\calculator\calculator.html:86
+#, fuzzy
+#| msgid "Январь"
+msgid "Январь"
+msgstr "Leden"
+
+#: .\calculator\templates\calculator\calculator.html:86
+msgid "Февраль"
+msgstr ""
+
+#: .\calculator\templates\calculator\calculator.html:86
 msgid "Март"
 msgstr "Březen"
 
-#: .\calculator\templates\calculator\calculator.html:71
+#: .\calculator\templates\calculator\calculator.html:86
 msgid "Апрель"
 msgstr "Duben"
 
-#: .\calculator\templates\calculator\calculator.html:71
+#: .\calculator\templates\calculator\calculator.html:86
 msgid "Май"
 msgstr "Květen"
 
-#: .\calculator\templates\calculator\calculator.html:71
+#: .\calculator\templates\calculator\calculator.html:86
 msgid "Июнь"
 msgstr "Červen"
 
-#: .\calculator\templates\calculator\calculator.html:71
+#: .\calculator\templates\calculator\calculator.html:86
 msgid "Июль"
 msgstr "Červenec"
 
-#: .\calculator\templates\calculator\calculator.html:71
+#: .\calculator\templates\calculator\calculator.html:86
 msgid "Август"
 msgstr "Srpen"
 
-#: .\calculator\templates\calculator\calculator.html:71
+#: .\calculator\templates\calculator\calculator.html:86
 msgid "Сентябрь"
 msgstr "Září"
 
-#: .\calculator\templates\calculator\calculator.html:71
+#: .\calculator\templates\calculator\calculator.html:86
 msgid "Октябрь"
 msgstr "Říjen"
 
-#: .\calculator\templates\calculator\calculator.html:71
+#: .\calculator\templates\calculator\calculator.html:86
 msgid "Ноябрь"
 msgstr "Listopad"
 
-#: .\calculator\templates\calculator\calculator.html:71
+#: .\calculator\templates\calculator\calculator.html:86
 msgid "Декабрь"
 msgstr "Prosinec"
 
-#: .\calculator\templates\calculator\calculator.html:78
+#: .\calculator\templates\calculator\calculator.html:93
 #, fuzzy
 #| msgid "Январь"
 msgid "Январь 2026"
 msgstr "Leden"
 
-#: .\calculator\templates\calculator\calculator.html:86
+#: .\calculator\templates\calculator\calculator.html:101
 msgid "Пн"
 msgstr "Po"
 
-#: .\calculator\templates\calculator\calculator.html:86
+#: .\calculator\templates\calculator\calculator.html:101
 msgid "Вт"
 msgstr "Út"
 
-#: .\calculator\templates\calculator\calculator.html:86
+#: .\calculator\templates\calculator\calculator.html:101
 msgid "Ср"
 msgstr "St"
 
-#: .\calculator\templates\calculator\calculator.html:86
+#: .\calculator\templates\calculator\calculator.html:101
 msgid "Чт"
 msgstr "Čt"
 
-#: .\calculator\templates\calculator\calculator.html:86
+#: .\calculator\templates\calculator\calculator.html:101
 msgid "Пт"
 msgstr "Pá"
 
-#: .\calculator\templates\calculator\calculator.html:86
+#: .\calculator\templates\calculator\calculator.html:101
 msgid "Сб"
 msgstr "So"
 
-#: .\calculator\templates\calculator\calculator.html:86
+#: .\calculator\templates\calculator\calculator.html:101
 msgid "Вс"
 msgstr "Ne"
 
-#: .\calculator\templates\calculator\calculator.html:109
-#: .\calculator\templates\calculator\calculator.html:154
+#: .\calculator\templates\calculator\calculator.html:124
+#: .\calculator\templates\calculator\calculator.html:204
 msgid "Далее"
 msgstr "Další"
 
-#: .\calculator\templates\calculator\calculator.html:121
-msgid "Выберите услугу"
+#: .\calculator\templates\calculator\calculator.html:136
+#, fuzzy
+#| msgid "Выберите услугу"
+msgid "Выбрать услугу"
 msgstr "Vyberte službu"
 
-#: .\calculator\templates\calculator\calculator.html:122
+#: .\calculator\templates\calculator\calculator.html:137
 msgid "Клининг или химчистка?"
 msgstr "Úklid nebo chemické čištění?"
 
-#: .\calculator\templates\calculator\calculator.html:131
-msgid "Генеральная и поддерживающая уборка помещений"
-msgstr "Hloubkový úklid a udržovací úklid prostor"
+#: .\calculator\templates\calculator\calculator.html:148
+#, fuzzy
+#| msgid "УБОРКА ПОМЕЩЕНИЙ И ХИМЧИСТКА МЕБЕЛИ"
+msgid "УБОРКА ПОМЕЩЕНИЙ"
+msgstr "ÚKLID PROSTOR A ČIŠTĚNÍ NÁBYTKU"
 
-#: .\calculator\templates\calculator\calculator.html:140
+#: .\calculator\templates\calculator\calculator.html:149
+#, fuzzy
+#| msgid "Профессионализм"
+msgid "Профессиональный клининг"
+msgstr "Profesionalita"
+
+#: .\calculator\templates\calculator\calculator.html:161
+#, fuzzy
+#| msgid "УБОРКА ПОМЕЩЕНИЙ И ХИМЧИСТКА МЕБЕЛИ"
+msgid "ПРОФЕССИОНАЛЬНАЯ ХИМЧИСТКА"
+msgstr "ÚKLID PROSTOR A ČIŠTĚNÍ NÁBYTKU"
+
+#: .\calculator\templates\calculator\calculator.html:162
 msgid "Химчистка мебели, ковров, матрасов"
 msgstr "Chemické čištění nábytku, koberců a matrací"
 
-#: .\calculator\templates\calculator\calculator.html:151
-#: .\calculator\templates\calculator\calculator.html:255
-#: .\calculator\templates\calculator\calculator.html:338
+#: .\calculator\templates\calculator\calculator.html:174
+msgid "ГРУЗОПЕРЕВОЗКИ"
+msgstr "STĚHOVÁNÍ"
+
+#: .\calculator\templates\calculator\calculator.html:175
+msgid "Машина с водителем и грузчиками"
+msgstr "Auto s řidičem a stěhováky"
+
+#: .\calculator\templates\calculator\calculator.html:187
+msgid "ХИМЧИСТКА ОБУВИ"
+msgstr "ČIŠTĚNÍ OBUVI"
+
+#: .\calculator\templates\calculator\calculator.html:188
+msgid "Кроссовки, кожа, замша"
+msgstr "Tenisky, kůže, semiš"
+
+#: .\calculator\templates\calculator\calculator.html:201
+#: .\calculator\templates\calculator\calculator.html:335
+#: .\calculator\templates\calculator\calculator.html:410
 msgid "Назад"
 msgstr "Zpět"
 
-#: .\calculator\templates\calculator\calculator.html:167
+#: .\calculator\templates\calculator\calculator.html:217
 msgid "Укажите детали вашего заказа"
 msgstr "Uveďte detaily své objednávky"
 
-#: .\calculator\templates\calculator\calculator.html:174
+#: .\calculator\templates\calculator\calculator.html:224
 msgid "Тип уборки"
 msgstr "Typ úklidu"
 
-#: .\calculator\templates\calculator\calculator.html:185
+#: .\calculator\templates\calculator\calculator.html:235
 msgid "BASIC — Поддерживающая уборка"
 msgstr "BASIC — Udržovací úklid"
 
-#: .\calculator\templates\calculator\calculator.html:186
+#: .\calculator\templates\calculator\calculator.html:236
 msgid "Быстрая уборка для поддержания чистоты"
 msgstr "Rychlý úklid pro udržení čistoty"
 
-#: .\calculator\templates\calculator\calculator.html:189
+#: .\calculator\templates\calculator\calculator.html:239
 #, fuzzy
 #| msgid "GENERAL+ — Премиум уборка"
 msgid "GENERAL — Генеральная уборка"
 msgstr "GENERAL — Hloubkový úklid"
 
-#: .\calculator\templates\calculator\calculator.html:190
+#: .\calculator\templates\calculator\calculator.html:240
 msgid "Глубокая уборка с детальной обработкой"
 msgstr "Hloubkový úklid s detailním čištěním"
 
-#: .\calculator\templates\calculator\calculator.html:193
+#: .\calculator\templates\calculator\calculator.html:243
 msgid "GENERAL+ — Премиум уборка"
 msgstr "GENERAL+ — Prémiový úklid"
 
-#: .\calculator\templates\calculator\calculator.html:194
+#: .\calculator\templates\calculator\calculator.html:244
 msgid "Максимально тщательная уборка с химчисткой"
 msgstr "Maximální pečlivý úklid s chemickým čištěním"
 
-#: .\calculator\templates\calculator\calculator.html:200
+#: .\calculator\templates\calculator\calculator.html:250
 msgid "Площадь (м²)"
 msgstr "Plocha (m²)"
 
-#: .\calculator\templates\calculator\calculator.html:203
+#: .\calculator\templates\calculator\calculator.html:253
 msgid "Введите площадь"
 msgstr "Zadejte plochu"
 
-#: .\calculator\templates\calculator\calculator.html:210
+#: .\calculator\templates\calculator\calculator.html:260
 msgid "20 м²"
 msgstr "20 m²"
 
-#: .\calculator\templates\calculator\calculator.html:211
+#: .\calculator\templates\calculator\calculator.html:261
 msgid "200 м²"
 msgstr "200 m²"
 
-#: .\calculator\templates\calculator\calculator.html:228
-#, fuzzy
-#| msgid "Выберите время"
+#: .\calculator\templates\calculator\calculator.html:278
 msgid "Выберите объекты химчистки"
-msgstr "Vyberte čas"
+msgstr "Vyberte položky k čištění"
 
-#: .\calculator\templates\calculator\calculator.html:237
+#: .\calculator\templates\calculator\calculator.html:288
+msgid "Выберите тариф"
+msgstr "Vyberte tarif"
+
+#: .\calculator\templates\calculator\calculator.html:294
+msgid "Количество часов"
+msgstr "Počet hodin"
+
+#: .\calculator\templates\calculator\calculator.html:298
+msgid "Дополнительные опции"
+msgstr "Doplňkové možnosti"
+
+#: .\calculator\templates\calculator\calculator.html:308
+msgid "Выберите тип обуви и количество пар"
+msgstr "Vyberte typ obuvi a počet párů"
+
+#: .\calculator\templates\calculator\calculator.html:317
 msgid "Итого"
 msgstr "Celkem"
 
-#: .\calculator\templates\calculator\calculator.html:246
+#: .\calculator\templates\calculator\calculator.html:326
 msgid "Точная цена после осмотра"
 msgstr "Přesná cena po prohlídce"
 
-#: .\calculator\templates\calculator\calculator.html:258
-#: .\calculator\templates\calculator\calculator.html:331
+#: .\calculator\templates\calculator\calculator.html:338
+#: .\calculator\templates\calculator\calculator.html:403
 msgid "Оформить заказ"
 msgstr "Odeslat objednávku"
 
-#: .\calculator\templates\calculator\calculator.html:270
+#: .\calculator\templates\calculator\calculator.html:350
 msgid "Оформление заказа"
 msgstr "Vyřízení objednávky"
 
-#: .\calculator\templates\calculator\calculator.html:271
+#: .\calculator\templates\calculator\calculator.html:351
 msgid "Заполните контактные данные"
 msgstr "Vyplňte kontaktní údaje"
 
-#: .\calculator\templates\calculator\calculator.html:276
+#: .\calculator\templates\calculator\calculator.html:356
 msgid "Ваш заказ"
 msgstr "Vaše objednávka"
 
-#: .\calculator\templates\calculator\calculator.html:281
+#: .\calculator\templates\calculator\calculator.html:361
 msgid "Итого:"
 msgstr "Celkem:"
 
-#: .\calculator\templates\calculator\calculator.html:289
+#: .\calculator\templates\calculator\calculator.html:369
 msgid "Имя"
 msgstr "Jméno"
 
-#: .\calculator\templates\calculator\calculator.html:290
+#: .\calculator\templates\calculator\calculator.html:370
 msgid "Ваше имя"
 msgstr "Vaše jméno"
 
-#: .\calculator\templates\calculator\calculator.html:303
+#: .\calculator\templates\calculator\calculator.html:383
 msgid "Улица, дом, квартира"
 msgstr "Ulice, číslo, byt"
 
-#: .\calculator\templates\calculator\calculator.html:307
+#: .\calculator\templates\calculator\calculator.html:387
 msgid "Удобное время"
 msgstr "Vhodný čas"
 
-#: .\calculator\templates\calculator\calculator.html:317
+#: .\calculator\templates\calculator\calculator.html:390
 msgid "Напишите удобное время (например, 09:30)"
 msgstr "Napište vhodný čas (např. 09:30)"
 
-#: .\calculator\templates\calculator\calculator.html:318
-msgid "Можно выбрать кнопку или вписать своё время вручную"
-msgstr "Můžete zvolit tlačítko nebo napsat svůj čas ručně"
-
-#: .\calculator\templates\calculator\calculator.html:323
+#: .\calculator\templates\calculator\calculator.html:395
 msgid "Комментарий"
 msgstr "Komentář"
 
-#: .\calculator\templates\calculator\calculator.html:325
+#: .\calculator\templates\calculator\calculator.html:397
 msgid "Особые пожелания..."
 msgstr "Speciální přání..."
 
-#: .\calculator\templates\calculator\calculator.html:351
+#: .\calculator\templates\calculator\calculator.html:423
 msgid "Заказ отправлен!"
 msgstr "Objednávka odeslána!"
 
-#: .\calculator\templates\calculator\calculator.html:352
+#: .\calculator\templates\calculator\calculator.html:424
 msgid "Спасибо! Мы свяжемся с вами в ближайшее время."
 msgstr "Děkujeme! Brzy se vám ozveme."
 
-#: .\calculator\templates\calculator\calculator.html:354
+#: .\calculator\templates\calculator\calculator.html:426
 msgid "На главную"
 msgstr "Na hlavní stránku"
 
@@ -657,6 +796,12 @@ msgstr "Angličtina"
 msgid "Čeština"
 msgstr "Čeština"
 
+#~ msgid "Генеральная и поддерживающая уборка помещений"
+#~ msgstr "Hloubkový úklid a udržovací úklid prostor"
+
+#~ msgid "Можно выбрать кнопку или вписать своё время вручную"
+#~ msgstr "Můžete zvolit tlačítko nebo napsat svůj čas ručně"
+
 #~ msgid "Профессиональная уборка квартир, домов и офисов — YourClean"
 #~ msgstr "Profesionální úklid bytů, domů a kanceláří — YourClean"
 
@@ -674,9 +819,6 @@ msgstr "Čeština"
 
 #~ msgid "лет на рынке"
 #~ msgstr "let na trhu"
-
-#~ msgid "Выберите время"
-#~ msgstr "Vyberte čas"
 
 #~ msgid "Наши работы"
 #~ msgstr "Naše práce"
@@ -731,9 +873,6 @@ msgstr "Čeština"
 #~| msgid "Эко-средства"
 #~ msgid "Прага 5 • Эко-средства"
 #~ msgstr "Praha 5 • Eko prostředky"
-
-#~ msgid "Пар"
-#~ msgstr "Pára"
 
 #~ msgid "Эко"
 #~ msgstr "Eko"
